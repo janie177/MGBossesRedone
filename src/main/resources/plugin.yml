@@ -1,0 +1,9 @@
+name: MGBossesRedone
+version: ${project.version}
+author: janie177
+main: com.minegusta.mgbossesredone.main.Main
+commands:
+  command:
+    description:
+    usage:
+    aliases:
