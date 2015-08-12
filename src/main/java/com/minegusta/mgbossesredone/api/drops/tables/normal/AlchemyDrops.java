@@ -1,4 +1,4 @@
-package com.minegusta.mgbossesredone.api.drops.tables;
+package com.minegusta.mgbossesredone.api.drops.tables.normal;
 
 import com.minegusta.mgbossesredone.api.drops.MGItem;
 import com.minegusta.mgbossesredone.api.drops.Table;

@@ -1,6 +1,7 @@
 package com.minegusta.mgbossesredone.api.drops;
 
-import com.minegusta.mgbossesredone.api.drops.tables.*;
+import com.minegusta.mgbossesredone.api.drops.tables.normal.*;
+import com.minegusta.mgbossesredone.api.drops.tables.special.SkeletorLoot;
 import com.minegusta.mgbossesredone.api.util.RandomUtil;
 import org.bukkit.inventory.ItemStack;
 
