@@ -14,14 +14,14 @@ public enum Boss {
         this.boss = boss;
     }
 
-    public AbstractBoss spawnBoss(SpawnLocation l)
+    public boolean spawnBoss(SpawnLocation l)
     {
         try {
             return boss.newInstance().spawn(l);
         } catch (Exception oopsiefloopsie){
             oopsiefloopsie.printStackTrace();
         }
-        return null;
+        return false;
     }
 
 }

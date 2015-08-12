@@ -42,6 +42,12 @@ public class PowerCollection {
         return null;
     }
 
+    public Optional<Power> getRandomPower()
+    {
+        if(RandomUtil.fiftyfifty()) return Optional.of(actives.get(RandomUtil.randomNumber(actives.size() - 1)));
+        return Optional.of(passives.get(RandomUtil.randomNumber(passives.size() - 1)));
+    }
+
     public void removePower(Power power, IPower.PowerType type)
     {
         if(type == IPower.PowerType.ACTIVE)

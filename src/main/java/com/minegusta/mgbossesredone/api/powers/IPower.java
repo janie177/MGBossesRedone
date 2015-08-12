@@ -1,9 +1,9 @@
 package com.minegusta.mgbossesredone.api.powers;
 
 import org.bukkit.entity.Entity;
+import org.bukkit.entity.LivingEntity;
 
 import java.util.List;
-import java.util.Optional;
 
 public interface IPower
 {
@@ -11,7 +11,7 @@ public interface IPower
 
     String getName();
 
-    void run(Entity bosss, Optional<List<Entity>> target);
+    void run(Entity bosss, List<LivingEntity> target);
 
     enum PowerType
     {

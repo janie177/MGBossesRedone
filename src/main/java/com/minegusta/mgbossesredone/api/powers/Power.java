@@ -1,8 +1,10 @@
 package com.minegusta.mgbossesredone.api.powers;
 
+import com.minegusta.mgbossesredone.api.powers.powers.Taunt;
+
 public enum Power {
 
-    EXAMPLE();
+    TAUNT(new Taunt());
 
     IPower power;
 

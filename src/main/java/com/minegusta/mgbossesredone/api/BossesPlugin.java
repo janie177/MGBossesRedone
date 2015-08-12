@@ -4,7 +4,6 @@ import com.minegusta.mgbossesredone.api.bosses.AbstractBoss;
 import com.minegusta.mgbossesredone.api.bosses.Boss;
 import com.minegusta.mgbossesredone.api.locations.SpawnLocation;
 import com.minegusta.mgbossesredone.registry.BossRegistry;
-import org.bukkit.Location;
 
 public class BossesPlugin {
     public static void createBoss(Boss boss, SpawnLocation l) {

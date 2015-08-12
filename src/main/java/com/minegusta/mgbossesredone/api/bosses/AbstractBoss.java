@@ -10,10 +10,9 @@ import com.minegusta.mgbossesredone.registry.BossRegistry;
 import com.minegusta.mgbossesredone.registry.LocationRegistry;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Effect;
-import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
-import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.event.entity.EntityDamageEvent;
 
 import java.util.List;
 import java.util.Optional;
@@ -26,14 +25,14 @@ public abstract class AbstractBoss
     private List<DropTable> tables = Lists.newArrayList();
     private String spawnLocationName;
 
-    public void addPower(Power power, IPower.PowerType type)
+    public void addPower(Power power)
     {
-        powers.addPower(power, type);
+        powers.addPower(power, power.getPower().getType());
     }
 
-    public void removePower(Power power, IPower.PowerType type)
+    public void removePower(Power power)
     {
-        powers.removePower(power, type);
+        powers.removePower(power, power.getPower().getType());
     }
 
     public LivingEntity getEntity()
@@ -56,9 +55,7 @@ public abstract class AbstractBoss
 
     public abstract int respawnTime();
 
-    public abstract List<Power> getStartingActivePowers();
-
-    public abstract List<Power> getStartingPassivePowers();
+    public abstract List<Power> getStartingPowers();
 
     public abstract Effect getEffectType();
 
@@ -77,7 +74,7 @@ public abstract class AbstractBoss
         return powers;
     }
 
-    public void dropLoot()
+    private void dropLoot()
     {
         tables.stream().forEach(table ->
         {
@@ -92,12 +89,13 @@ public abstract class AbstractBoss
         entity.getWorld().getPlayers().stream().filter(p -> p.getLocation().distance(entity.getLocation()) < radius).forEach(p -> p.sendMessage(ChatColor.DARK_RED + "[" + ChatColor.YELLOW + getName() + ChatColor.DARK_RED + "]" + ChatColor.RESET + deathMessage()));
     }
 
-    public void removeBoss()
+    private void removeBoss()
     {
+        getSpawnLocation().setInstance(null);
         BossRegistry.removeBoss(entity.getUniqueId().toString());
     }
 
-    public abstract void onDamage(EntityDamageByEntityEvent e, LivingEntity attacker, boolean arrow);
+    public abstract void onDamage(EntityDamageEvent e, Optional<LivingEntity> attacker, boolean arrow);
 
     public void onDeath(boolean loot, boolean respawn)
     {
@@ -108,10 +106,14 @@ public abstract class AbstractBoss
         removeBoss();
     }
 
-    public AbstractBoss spawn(SpawnLocation l)
+    public boolean spawn(SpawnLocation l)
     {
-        if(LocationRegistry.isSpawned(l.getName()))return this;
-        l.setInstance(this);
+        if(l.getIfSpawned())return false;
+
+        if(!l.getLocation().getChunk().isLoaded())
+        {
+            return false;
+        }
 
         LivingEntity boss = (LivingEntity) l.getLocation().getWorld().spawnEntity(l.getLocation(), getType());
         boss.setMaxHealth(getHealth());
@@ -121,14 +123,9 @@ public abstract class AbstractBoss
         spawnLocationName = l.getName();
         this.entity = boss;
 
-        for(Power power : getStartingActivePowers())
-        {
-            addPower(power, IPower.PowerType.ACTIVE);
-        }
-        for(Power power : getStartingPassivePowers())
-        {
-            addPower(power, IPower.PowerType.PASSIVE);
-        }
+        l.setInstance(getEntity().getUniqueId().toString());
+
+        getStartingPowers().stream().forEach(this::addPower);
 
         BossRegistry.createBoss(boss.getUniqueId().toString(), this);
 
@@ -138,7 +135,7 @@ public abstract class AbstractBoss
 
         onSpawn();
 
-        return this;
+        return true;
     }
 
     public abstract void applyStageUpdate();
@@ -148,12 +145,12 @@ public abstract class AbstractBoss
         if(ticks % getStageInterval() == -0) applyStageUpdate();
     }
 
-    public void runpower(Power power, Optional<List<Entity>> target)
+    public void runpower(Power power, List<LivingEntity> target)
     {
         power.getPower().run(entity, target);
     }
 
-    public void runPower(IPower.PowerType type, Optional<List<Entity>> target)
+    public void runRandomPower(IPower.PowerType type, List<LivingEntity> target)
     {
         Optional<Power> power = getPowers().getRandomPower(type);
         if(power.isPresent())
@@ -161,6 +158,16 @@ public abstract class AbstractBoss
             power.get().getPower().run(entity, target);
         }
     }
+
+    public void runRandomPower(List<LivingEntity> target)
+    {
+        Optional<Power> power = getPowers().getRandomPower();
+        if(power.isPresent())
+        {
+            power.get().getPower().run(entity, target);
+        }
+    }
+
 
 
 }

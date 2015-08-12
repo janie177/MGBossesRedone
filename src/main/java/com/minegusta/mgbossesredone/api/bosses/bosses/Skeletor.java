@@ -1,61 +1,59 @@
 package com.minegusta.mgbossesredone.api.bosses.bosses;
 
+import com.google.common.collect.Lists;
 import com.minegusta.mgbossesredone.api.bosses.AbstractBoss;
 import com.minegusta.mgbossesredone.api.bosses.Boss;
 import com.minegusta.mgbossesredone.api.drops.DropTable;
 import com.minegusta.mgbossesredone.api.powers.Power;
+import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Effect;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
-import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.event.entity.EntityDamageEvent;
 
 import java.util.List;
+import java.util.Optional;
 
 public class Skeletor extends AbstractBoss {
 
     @Override
     public String getName() {
-        return null;
+        return ChatColor.GRAY + "Skeletor";
     }
 
     @Override
     public EntityType getType() {
-        return null;
+        return EntityType.SKELETON;
     }
 
     @Override
     public Boss getBossType() {
-        return null;
+        return Boss.SKELETOR;
     }
 
     @Override
     public int getPowerChance() {
-        return 0;
+        return 30;
     }
 
     @Override
     public int respawnTime() {
-        return 0;
+        return 30;
     }
 
     @Override
-    public List<Power> getStartingActivePowers() {
-        return null;
-    }
-
-    @Override
-    public List<Power> getStartingPassivePowers() {
-        return null;
+    public List<Power> getStartingPowers() {
+        return Lists.newArrayList(Power.TAUNT);
     }
 
     @Override
     public Effect getEffectType() {
-        return null;
+        return Effect.FLAME;
     }
 
     @Override
     public double getHealth() {
-        return 0;
+        return 200;
     }
 
     @Override
@@ -65,21 +63,21 @@ public class Skeletor extends AbstractBoss {
 
     @Override
     public List<DropTable> getDropTables() {
-        return null;
+        return Lists.newArrayList(DropTable.BONES);
     }
 
     @Override
     public String deathMessage() {
-        return null;
+        return "You have defeated me!!";
     }
 
     @Override
     public int getStageInterval() {
-        return 0;
+        return 20;
     }
 
     @Override
-    public void onDamage(EntityDamageByEntityEvent e, LivingEntity attacker, boolean arrow) {
+    public void onDamage(EntityDamageEvent e, Optional<LivingEntity> attacker, boolean arrow) {
 
     }
 
