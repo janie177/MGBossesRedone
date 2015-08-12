@@ -1,4 +1,6 @@
 package com.minegusta.mgbossesredone.listeners;
 
-public class PowerListener {
+import org.bukkit.event.Listener;
+
+public class PowerListener implements Listener {
 }
