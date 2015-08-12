@@ -8,11 +8,18 @@ import org.bukkit.Material;
 public class BuildBlockLoot extends Table {
 
     private static final MGItem[] items = new MGItem[]{
-            new MGItem(ChatColor.GRAY + "Bone", 1, 0, Material.BONE, null, "Good calcium has come to you!", "Thank mr skeletal."),
-            new MGItem(ChatColor.GRAY + "Funny Bone", 1, 0, Material.BONE, null, "Hahahahaha"),
-            new MGItem(ChatColor.GRAY + "Boner", 1, 0, Material.BONE, null, "What do you get if you dissolve", "this bone in water?", ChatColor.DARK_GRAY + "Hard water."),
-            new MGItem(ChatColor.GRAY + "Ben", 1, 0, Material.BONE, null, "A bone named ben."),
-            new MGItem(ChatColor.GRAY + "Skull", 1, 0, Material.SKULL_ITEM, null, "Spooky scary skeletins,", "send shivers down your spine.")
+            new MGItem(ChatColor.GOLD + "Building Block", 25, 0, Material.LOG, null, "Useful for building with."),
+            new MGItem(ChatColor.GOLD + "Building Block", 25, 0, Material.BRICK, null, "Useful for building with."),
+            new MGItem(ChatColor.GOLD + "Building Block", 25, 0, Material.STONE_SLAB2, null, "Useful for building with."),
+            new MGItem(ChatColor.GOLD + "Building Block", 25, 0, Material.SMOOTH_BRICK, null, "Useful for building with."),
+            new MGItem(ChatColor.GOLD + "Building Block", 25, 0, Material.NETHER_BRICK, null, "Useful for building with."),
+            new MGItem(ChatColor.GOLD + "Building Block", 25, 2, Material.LOG, null, "Useful for building with."),
+            new MGItem(ChatColor.GOLD + "Building Block", 25, 3, Material.LOG, null, "Useful for building with."),
+            new MGItem(ChatColor.GOLD + "Building Block", 25, 1, Material.LOG, null, "Useful for building with."),
+            new MGItem(ChatColor.GOLD + "Building Block", 25, 0, Material.STONE, null, "Useful for building with."),
+            new MGItem(ChatColor.GOLD + "Building Block", 25, 0, Material.FENCE, null, "Useful for building with."),
+            new MGItem(ChatColor.GOLD + "Building Block", 25, 0, Material.SMOOTH_BRICK, null, "Useful for building with."),
+            new MGItem(ChatColor.GOLD + "Building Block", 25, 0, Material.SMOOTH_BRICK, null, "Useful for building with."),
     };
 
     @Override

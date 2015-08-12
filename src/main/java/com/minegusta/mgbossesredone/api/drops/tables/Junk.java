@@ -8,11 +8,16 @@ import org.bukkit.Material;
 public class Junk extends Table {
 
     private static final MGItem[] items = new MGItem[]{
-            new MGItem(ChatColor.GRAY + "Bone", 1, 0, Material.BONE, null, "Good calcium has come to you!", "Thank mr skeletal."),
-            new MGItem(ChatColor.GRAY + "Funny Bone", 1, 0, Material.BONE, null, "Hahahahaha"),
-            new MGItem(ChatColor.GRAY + "Boner", 1, 0, Material.BONE, null, "What do you get if you dissolve", "this bone in water?", ChatColor.DARK_GRAY + "Hard water."),
-            new MGItem(ChatColor.GRAY + "Ben", 1, 0, Material.BONE, null, "A bone named ben."),
-            new MGItem(ChatColor.GRAY + "Skull", 1, 0, Material.SKULL_ITEM, null, "Spooky scary skeletins,", "send shivers down your spine.")
+            new MGItem(ChatColor.GRAY + "CobbleStone", 4, 0, Material.COBBLESTONE, null, ":("),
+            new MGItem(ChatColor.GRAY + "Stick", 4, 0, Material.STICK, null, "Stick with it."),
+            new MGItem(ChatColor.GRAY + "Grass", 4, 0, Material.GRASS, null, "Grassy."),
+            new MGItem(ChatColor.GRAY + "Dirt", 4, 0, Material.DIRT, null, "Dirty."),
+            new MGItem(ChatColor.GRAY + "Mycelium", 4, 0, Material.MYCEL, null, "Moo."),
+            new MGItem(ChatColor.GRAY + "Ice", 4, 0, Material.ICE, null, "Icy."),
+            new MGItem(ChatColor.GRAY + "Egg", 4, 0, Material.EGG, null, "Eggy."),
+            new MGItem(ChatColor.GRAY + "Bread", 4, 0, Material.BREAD, null, "Bready."),
+            new MGItem(ChatColor.GRAY + "Melon Seeds", 4, 0, Material.MELON_SEEDS, null, "Seedy."),
+            new MGItem(ChatColor.GRAY + "Seeds", 4, 0, Material.SEEDS, null, "Seedy."),
     };
 
     @Override
