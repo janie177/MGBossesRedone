@@ -6,6 +6,7 @@ import com.minegusta.mgbossesredone.api.util.LocationUtil;
 import com.minegusta.mgbossesredone.main.ConfigManager;
 import com.minegusta.mgbossesredone.registry.LocationRegistry;
 import net.md_5.bungee.api.ChatColor;
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -13,6 +14,8 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
+
+import java.util.Optional;
 
 public class BossCommand implements CommandExecutor {
     @Override
@@ -36,7 +39,16 @@ public class BossCommand implements CommandExecutor {
             if(LocationRegistry.getKeys().contains(args[1]))
             {
                 f.set(args[1], null);
-                LocationRegistry.getSpawnLocation(args[1]).getBossInstance().ifPresent(boss -> boss.onDeath(false, false));
+                SpawnLocation spawn =  LocationRegistry.getSpawnLocation(args[1]);
+                spawn.getBossInstance().ifPresent(boss -> boss.onDeath(false, false));
+                int id;
+                if((id = spawn.getTaskId()) != -1)
+                {
+                    if(Bukkit.getScheduler().isQueued(id))
+                    {
+                        Bukkit.getScheduler().cancelTask(id);
+                    }
+                }
                 LocationRegistry.remove(args[1]);
                 ConfigManager.saveLocationsConfig(f);
                 p.sendMessage(ChatColor.GREEN + "You removed a boss location!");
@@ -66,7 +78,7 @@ public class BossCommand implements CommandExecutor {
             String key = args[1];
             try
             {
-                f.set(key + ".boss", Boss.valueOf(args[2].toUpperCase()));
+                f.set(key + ".boss", args[2].toUpperCase());
                 f.set(key + ".location", stringLocation);
                 LocationRegistry.add(key, new SpawnLocation(key, l, Boss.valueOf(args[2].toUpperCase()), null));
                 ConfigManager.saveLocationsConfig(f);
@@ -77,6 +89,7 @@ public class BossCommand implements CommandExecutor {
                 {
                     p.sendMessage(ChatColor.GRAY + " - " + ChatColor.LIGHT_PURPLE + boss.name());
                 }
+                ignored.printStackTrace();
                 return true;
             }
 

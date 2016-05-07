@@ -17,8 +17,15 @@ public class RandomUtil {
         return rand.nextBoolean();
     }
 
-    public static int randomNumber(int max) {
+    public static int randomNumberNeverZero(int max) {
+        if(max < 1) return 0;
         return rand.nextInt(max) + 1;
+    }
+
+    public static int randomNumberZeroIncludedMaxExcluded(int max)
+    {
+        if(max < 1) return 0;
+        return rand.nextInt(max);
     }
 
     public static double randomDouble(double max, double min) {

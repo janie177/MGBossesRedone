@@ -20,4 +20,9 @@ public class MediumDrops extends Table {
     public MGItem[] getItems() {
         return items;
     }
+
+    @Override
+    public int getPromillage() {
+        return 150;
+    }
 }

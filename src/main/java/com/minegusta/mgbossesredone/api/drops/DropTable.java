@@ -7,24 +7,24 @@ import org.bukkit.inventory.ItemStack;
 
 public enum DropTable {
 
-    ALCHEMY(new AlchemyDrops(), 250),
-    GOOD(new GoodDrops(), 100),
-    MEDIUM(new MediumDrops(), 250),
-    ORE(new OreDrops(), 100),
-    JUNK(new Junk(), 900),
-    SKELETOR_SPECIAL(new SkeletorLoot(), 80),
-    ARMOUR(new ArmourLoot(), 120),
-    TOOL(new ToolLoot(), 150),
-    BUILDBLOCKS(new BuildBlockLoot(), 200),
-    BONES(new Bones(), 1000);
+    ALCHEMY(new AlchemyDrops()),
+    GOOD(new GoodDrops()),
+    MEDIUM(new MediumDrops()),
+    ORE(new OreDrops()),
+    JUNK(new Junk()),
+    SKELETOR_SPECIAL(new SkeletorLoot()),
+    ARMOUR(new ArmourLoot()),
+    TOOL(new ToolLoot()),
+    BUILDBLOCKS(new BuildBlockLoot()),
+    BONES(new Bones());
 
     private Table table;
     private int chance;
 
-    DropTable(Table table, int chance)
+    DropTable(Table table)
     {
         this.table = table;
-        this.chance = chance;
+        this.chance = table.getPromillage();
     }
 
     public boolean rolledPositive()

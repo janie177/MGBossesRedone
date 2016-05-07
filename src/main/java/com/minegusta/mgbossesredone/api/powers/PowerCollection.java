@@ -1,4 +1,4 @@
-package com.minegusta.mgbossesredone.api.bosses;
+package com.minegusta.mgbossesredone.api.powers;
 
 import com.google.common.collect.Lists;
 import com.minegusta.mgbossesredone.api.powers.IPower;
@@ -33,19 +33,20 @@ public class PowerCollection {
     {
         if(type == IPower.PowerType.ACTIVE && !actives.isEmpty())
         {
-            return Optional.of(actives.get(RandomUtil.randomNumber(actives.size() - 1)));
+            return Optional.of(actives.get(RandomUtil.randomNumberZeroIncludedMaxExcluded(actives.size())));
         }
         else if(type == IPower.PowerType.PASSIVE && !passives.isEmpty())
         {
-            return Optional.of(actives.get(RandomUtil.randomNumber(passives.size() - 1)));
+            return Optional.of(actives.get(RandomUtil.randomNumberZeroIncludedMaxExcluded(passives.size())));
         }
-        return null;
+        return Optional.empty();
     }
 
     public Optional<Power> getRandomPower()
     {
-        if(RandomUtil.fiftyfifty()) return Optional.of(actives.get(RandomUtil.randomNumber(actives.size() - 1)));
-        return Optional.of(passives.get(RandomUtil.randomNumber(passives.size() - 1)));
+        if(RandomUtil.fiftyfifty() && !actives.isEmpty()) return Optional.of(actives.get(RandomUtil.randomNumberZeroIncludedMaxExcluded(actives.size())));
+        else if(!passives.isEmpty()) return Optional.of(passives.get(RandomUtil.randomNumberZeroIncludedMaxExcluded(passives.size())));
+        return Optional.empty();
     }
 
     public void removePower(Power power, IPower.PowerType type)

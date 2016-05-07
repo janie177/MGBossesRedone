@@ -3,7 +3,8 @@ version: ${project.version}
 author: janie177
 main: com.minegusta.mgbossesredone.main.Main
 commands:
-  command:
-    description:
-    usage:
-    aliases:
+  boss:
+    description: The administrative Boss command.
+    usage: /Boss
+    aliases: [mgbosses, mgboss, mgb]
+    permission: minegusta.boss

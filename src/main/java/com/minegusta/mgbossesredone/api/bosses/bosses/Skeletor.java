@@ -6,6 +6,7 @@ import com.minegusta.mgbossesredone.api.bosses.Boss;
 import com.minegusta.mgbossesredone.api.drops.DropTable;
 import com.minegusta.mgbossesredone.api.powers.Power;
 import net.md_5.bungee.api.ChatColor;
+import org.bukkit.Bukkit;
 import org.bukkit.Effect;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
@@ -19,6 +20,21 @@ public class Skeletor extends AbstractBoss {
     @Override
     public String getName() {
         return ChatColor.GRAY + "Skeletor";
+    }
+
+    @Override
+    public int getActiveAttackRadius() {
+        return 20;
+    }
+
+    @Override
+    public int getActiveAttackInterval() {
+        return 3;
+    }
+
+    @Override
+    public int getExp() {
+        return 6;
     }
 
     @Override
@@ -53,7 +69,7 @@ public class Skeletor extends AbstractBoss {
 
     @Override
     public double getHealth() {
-        return 200;
+        return 250;
     }
 
     @Override
@@ -73,7 +89,7 @@ public class Skeletor extends AbstractBoss {
 
     @Override
     public int getStageInterval() {
-        return 20;
+        return 15;
     }
 
     @Override

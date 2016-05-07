@@ -7,7 +7,7 @@ import com.minegusta.mgbossesredone.registry.BossRegistry;
 
 public class BossesPlugin {
     public static void createBoss(Boss boss, SpawnLocation l) {
-        boss.spawnBoss(l);
+        if(!l.getIfSpawned()) boss.spawnBoss(l);
     }
 
     public static void removeBoss(String uuid) {

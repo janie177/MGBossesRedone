@@ -5,12 +5,14 @@ import com.minegusta.mgbossesredone.api.drops.DropTable;
 import com.minegusta.mgbossesredone.api.locations.SpawnLocation;
 import com.minegusta.mgbossesredone.api.powers.IPower;
 import com.minegusta.mgbossesredone.api.powers.Power;
+import com.minegusta.mgbossesredone.api.powers.PowerCollection;
 import com.minegusta.mgbossesredone.api.tasks.SpawnTask;
 import com.minegusta.mgbossesredone.registry.BossRegistry;
 import com.minegusta.mgbossesredone.registry.LocationRegistry;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Effect;
 import org.bukkit.entity.EntityType;
+import org.bukkit.entity.ExperienceOrb;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.entity.EntityDamageEvent;
 
@@ -24,6 +26,7 @@ public abstract class AbstractBoss
     private LivingEntity entity;
     private List<DropTable> tables = Lists.newArrayList();
     private String spawnLocationName;
+    private int stage = 0;
 
     public void addPower(Power power)
     {
@@ -41,6 +44,16 @@ public abstract class AbstractBoss
     }
 
     public abstract String getName();
+
+    public abstract int getActiveAttackRadius();
+
+	/**
+	 * Amount of seconds it takes on average to run an attack.
+     * @return
+     */
+    public abstract int getActiveAttackInterval();
+
+    public abstract int getExp();
 
     public abstract EntityType getType();
 
@@ -74,6 +87,16 @@ public abstract class AbstractBoss
         return powers;
     }
 
+    public int getStage()
+    {
+        return stage;
+    }
+
+    public void setStage(int stage)
+    {
+        this.stage = stage;
+    }
+
     private void dropLoot()
     {
         tables.stream().forEach(table ->
@@ -89,7 +112,7 @@ public abstract class AbstractBoss
         entity.getWorld().getPlayers().stream().filter(p -> p.getLocation().distance(entity.getLocation()) < radius).forEach(p -> p.sendMessage(ChatColor.DARK_RED + "[" + ChatColor.YELLOW + getName() + ChatColor.DARK_RED + "]" + ChatColor.RESET + deathMessage()));
     }
 
-    private void removeBoss()
+    public void removeBoss()
     {
         getSpawnLocation().setInstance(null);
         BossRegistry.removeBoss(entity.getUniqueId().toString());
@@ -100,16 +123,18 @@ public abstract class AbstractBoss
     public void onDeath(boolean loot, boolean respawn)
     {
         sendDeathMessage(30);
-        if(loot) dropLoot();
+        if(loot)
+        {
+            ((ExperienceOrb)entity.getWorld().spawnEntity(entity.getLocation(), EntityType.EXPERIENCE_ORB)).setExperience(getExp());
+            dropLoot();
+        }
         getSpawnLocation().setIfSpawned(false);
-        if(respawn) new SpawnTask(respawnTime(), getBossType(), getSpawnLocation()).startTimer();
+        if(respawn) getSpawnLocation().setTaskId(new SpawnTask(respawnTime(), getBossType(), getSpawnLocation()).startTimer());
         removeBoss();
     }
 
     public boolean spawn(SpawnLocation l)
     {
-        if(l.getIfSpawned())return false;
-
         if(!l.getLocation().getChunk().isLoaded())
         {
             return false;
@@ -142,7 +167,7 @@ public abstract class AbstractBoss
 
     public void updateStage(int ticks)
     {
-        if(ticks % getStageInterval() == -0) applyStageUpdate();
+        if(ticks % getStageInterval() == 0) applyStageUpdate();
     }
 
     public void runpower(Power power, List<LivingEntity> target)

@@ -26,4 +26,9 @@ public class BuildBlockLoot extends Table {
     public MGItem[] getItems() {
         return items;
     }
+
+    @Override
+    public int getPromillage() {
+        return 200;
+    }
 }

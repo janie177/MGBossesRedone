@@ -26,4 +26,9 @@ public class OreDrops extends Table {
     public MGItem[] getItems() {
         return items;
     }
+
+    @Override
+    public int getPromillage() {
+        return 100;
+    }
 }

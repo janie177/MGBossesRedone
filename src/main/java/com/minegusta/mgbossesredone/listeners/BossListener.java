@@ -3,6 +3,7 @@ package com.minegusta.mgbossesredone.listeners;
 import com.google.common.collect.Lists;
 import com.minegusta.mgbossesredone.api.BossesPlugin;
 import com.minegusta.mgbossesredone.api.bosses.AbstractBoss;
+import com.minegusta.mgbossesredone.api.powers.IPower;
 import com.minegusta.mgbossesredone.api.util.RandomUtil;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.LivingEntity;
@@ -23,7 +24,11 @@ public class BossListener implements Listener
     public void onBossDeath(EntityDeathEvent e)
     {
         String uuid = e.getEntity().getUniqueId().toString();
-        if(BossesPlugin.isBoss(uuid))BossesPlugin.getBossFromUuid(uuid).onDeath(true, true);
+        if(BossesPlugin.isBoss(uuid))
+        {
+            e.setDroppedExp(0);
+            BossesPlugin.getBossFromUuid(uuid).onDeath(true, true);
+        }
     }
 
     @EventHandler
@@ -63,10 +68,10 @@ public class BossListener implements Listener
             {
                 List<LivingEntity> entities = Lists.newArrayList();
                 e.getEntity().getWorld().getLivingEntities().stream().filter(ent -> ent.getLocation().distance(e.getEntity().getLocation()) < 10 && !ent.getUniqueId().toString().equals(e.getEntity().getUniqueId().toString())).forEach(entities::add);
-                boss.onDamage(e, null, false);
+                boss.onDamage(e, Optional.empty(), false);
                 if(RandomUtil.chance(boss.getPowerChance()))
                 {
-                    boss.runRandomPower(entities);
+                    boss.runRandomPower(IPower.PowerType.PASSIVE, entities);
                 }
             }
         }

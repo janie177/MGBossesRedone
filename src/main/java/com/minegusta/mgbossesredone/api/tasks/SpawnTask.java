@@ -1,9 +1,11 @@
 package com.minegusta.mgbossesredone.api.tasks;
 
+import com.minegusta.mgbossesredone.api.bosses.AbstractBoss;
 import com.minegusta.mgbossesredone.api.bosses.Boss;
 import com.minegusta.mgbossesredone.api.locations.SpawnLocation;
 import com.minegusta.mgbossesredone.main.Main;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 
 public class SpawnTask
 {
@@ -19,10 +21,11 @@ public class SpawnTask
         location.setIfSpawned(true);
     }
 
-    public void startTimer()
+    public int startTimer()
     {
-        Bukkit.getScheduler().scheduleSyncDelayedTask(Main.getPlugin(), ()->
+       return Bukkit.getScheduler().scheduleSyncDelayedTask(Main.getPlugin(), ()->
         {
+            location.setIfSpawned(false);
             boss.spawnBoss(location);
         }, time * 20);
     }

@@ -14,7 +14,7 @@ public enum Boss {
         this.boss = boss;
     }
 
-    public boolean spawnBoss(SpawnLocation l)
+    public synchronized boolean spawnBoss(SpawnLocation l)
     {
         try {
             return boss.newInstance().spawn(l);
@@ -23,5 +23,4 @@ public enum Boss {
         }
         return false;
     }
-
 }
