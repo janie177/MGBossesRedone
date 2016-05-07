@@ -23,12 +23,12 @@ public class Skeletor extends AbstractBoss {
     }
 
     @Override
-    public int getActiveAttackRadius() {
+    public int getSpecialAttackRadius() {
         return 20;
     }
 
     @Override
-    public int getActiveAttackInterval() {
+    public int getSpecialAttackInterval() {
         return 3;
     }
 

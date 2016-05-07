@@ -39,7 +39,7 @@ public class SpawnListener implements Listener
         {
             if(l.getLocation().getChunk().getZ() == e.getChunk().getZ() && e.getChunk().getX() == l.getLocation().getChunk().getX())
             {
-                l.getBossInstance().ifPresent(b -> b.onDeath(false, false));
+                l.getBossInstance().ifPresent(b -> b.onDeath(false, false, false));
             }
         });
     }

@@ -16,6 +16,9 @@ public class BossEffectTask
             {
                 boss.getBossInstance().get().getEntity().getWorld().spigot().playEffect(boss.getBossInstance().get().getEntity().getLocation(), boss.getBossInstance().get().getEffectType(), 0, 0, 0.5F, 1.3F, 0.5F, 1/5, 10, 35);
             }
+            else {
+                boss.getBossInstance().get().onDeath(false, false, false);
+            }
         }),10,10);
     }
 

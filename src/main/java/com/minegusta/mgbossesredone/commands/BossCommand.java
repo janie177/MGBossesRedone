@@ -40,7 +40,7 @@ public class BossCommand implements CommandExecutor {
             {
                 f.set(args[1], null);
                 SpawnLocation spawn =  LocationRegistry.getSpawnLocation(args[1]);
-                spawn.getBossInstance().ifPresent(boss -> boss.onDeath(false, false));
+                spawn.getBossInstance().ifPresent(boss -> boss.onDeath(false, false, false));
                 int id;
                 if((id = spawn.getTaskId()) != -1)
                 {

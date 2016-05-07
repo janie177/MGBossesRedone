@@ -12,11 +12,13 @@ public class PowerCollection {
 
     private List<Power> actives = Lists.newArrayList();
     private List<Power> passives = Lists.newArrayList();
+    private List<Power> specials = Lists.newArrayList();
 
-    public PowerCollection(List<Power> actives, List<Power> passives)
+    public PowerCollection(List<Power> actives, List<Power> passives, List<Power> specials)
     {
         this.actives = actives;
         this.passives = passives;
+        this.specials = specials;
     }
 
     public PowerCollection()
@@ -29,15 +31,24 @@ public class PowerCollection {
         return actives;
     }
 
+    public List<Power> getSpecials()
+    {
+        return specials;
+    }
+
     public Optional<Power> getRandomPower(IPower.PowerType type)
     {
+        if(type == IPower.PowerType.SPECIAL && !specials.isEmpty())
+        {
+            return Optional.of(specials.get(RandomUtil.randomNumberZeroIncludedMaxExcluded(specials.size())));
+        }
         if(type == IPower.PowerType.ACTIVE && !actives.isEmpty())
         {
             return Optional.of(actives.get(RandomUtil.randomNumberZeroIncludedMaxExcluded(actives.size())));
         }
         else if(type == IPower.PowerType.PASSIVE && !passives.isEmpty())
         {
-            return Optional.of(actives.get(RandomUtil.randomNumberZeroIncludedMaxExcluded(passives.size())));
+            return Optional.of(passives.get(RandomUtil.randomNumberZeroIncludedMaxExcluded(passives.size())));
         }
         return Optional.empty();
     }
@@ -76,6 +87,10 @@ public class PowerCollection {
         else if (type == IPower.PowerType.PASSIVE)
         {
             passives.add(power);
+        }
+        else if(type == IPower.PowerType.SPECIAL)
+        {
+            specials.add(power);
         }
     }
 

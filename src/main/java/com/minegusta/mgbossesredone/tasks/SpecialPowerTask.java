@@ -8,7 +8,7 @@ import org.bukkit.Bukkit;
 
 import java.util.stream.Collectors;
 
-public class ActivePowerTask {
+public class SpecialPowerTask {
 	private static int id = -1;
 
 	public static void stop()
@@ -23,10 +23,10 @@ public class ActivePowerTask {
 	{
 		id = Bukkit.getScheduler().scheduleSyncRepeatingTask(Main.getPlugin(), ()->
 		{
-			LocationRegistry.getLocations().stream().filter(l -> l.getIfSpawned() && (l.getBossInstance().isPresent() && (l.getBossInstance().get().getEntity().getHealth() > 0) && RandomUtil.randomNumberZeroIncludedMaxExcluded(l.getBossInstance().get().getActiveAttackInterval()) == 0))
-					.forEach(l -> l.getBossInstance().get().runRandomPower(IPower.PowerType.ACTIVE,
+			LocationRegistry.getLocations().stream().filter(l -> l.getIfSpawned() && (l.getBossInstance().isPresent() && (l.getBossInstance().get().getEntity().getHealth() > 0) && !l.getBossInstance().get().getPowers().getSpecials().isEmpty() && RandomUtil.randomNumberZeroIncludedMaxExcluded(l.getBossInstance().get().getSpecialAttackInterval()) == 0))
+					.forEach(l -> l.getBossInstance().get().runRandomPower(IPower.PowerType.SPECIAL,
 							Bukkit.getOnlinePlayers().stream().filter(
-									p -> p.getWorld() == l.getLocation().getWorld() && l.getLocation().distance(p.getLocation()) <= l.getBossInstance().get().getActiveAttackRadius())
+									p -> p.getWorld() == l.getLocation().getWorld() && l.getLocation().distance(p.getLocation()) <= l.getBossInstance().get().getSpecialAttackRadius())
 							.collect(Collectors.toList())
 					));
 		}, 20, 20);

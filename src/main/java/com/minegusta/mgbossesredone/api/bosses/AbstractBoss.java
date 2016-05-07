@@ -45,13 +45,13 @@ public abstract class AbstractBoss
 
     public abstract String getName();
 
-    public abstract int getActiveAttackRadius();
+    public abstract int getSpecialAttackRadius();
 
 	/**
 	 * Amount of seconds it takes on average to run an attack.
      * @return
      */
-    public abstract int getActiveAttackInterval();
+    public abstract int getSpecialAttackInterval();
 
     public abstract int getExp();
 
@@ -134,9 +134,9 @@ public abstract class AbstractBoss
 
     public abstract void onDamage(EntityDamageEvent e, Optional<LivingEntity> attacker, boolean arrow);
 
-    public void onDeath(boolean loot, boolean respawn)
+    public void onDeath(boolean loot, boolean respawn, boolean message)
     {
-        sendDeathMessage(30);
+        if(message) sendDeathMessage(30);
         if(loot)
         {
             ((ExperienceOrb)entity.getWorld().spawnEntity(entity.getLocation(), EntityType.EXPERIENCE_ORB)).setExperience(getExp());
@@ -204,7 +204,4 @@ public abstract class AbstractBoss
             power.get().getPower().run(entity, target);
         }
     }
-
-
-
 }

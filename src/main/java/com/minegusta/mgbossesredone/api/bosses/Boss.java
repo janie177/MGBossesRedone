@@ -2,6 +2,8 @@ package com.minegusta.mgbossesredone.api.bosses;
 
 import com.minegusta.mgbossesredone.api.bosses.bosses.Skeletor;
 import com.minegusta.mgbossesredone.api.locations.SpawnLocation;
+import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 
 import java.util.Optional;
 

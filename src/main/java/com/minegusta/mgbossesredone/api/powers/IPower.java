@@ -15,6 +15,6 @@ public interface IPower
 
     enum PowerType
     {
-        ACTIVE,PASSIVE
+        ACTIVE,PASSIVE, SPECIAL;
     }
 }

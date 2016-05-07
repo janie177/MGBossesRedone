@@ -24,11 +24,8 @@ public class BossListener implements Listener
     public void onBossDeath(EntityDeathEvent e)
     {
         String uuid = e.getEntity().getUniqueId().toString();
-        if(BossesPlugin.isBoss(uuid))
-        {
-            e.setDroppedExp(0);
-            BossesPlugin.getBossFromUuid(uuid).ifPresent(boss -> boss.onDeath(true, true));
-        }
+        e.setDroppedExp(0);
+        BossesPlugin.getBossFromUuid(uuid).ifPresent(boss -> boss.onDeath(true, true, true));
     }
 
     @EventHandler
