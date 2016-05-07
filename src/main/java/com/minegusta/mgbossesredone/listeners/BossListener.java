@@ -27,7 +27,7 @@ public class BossListener implements Listener
         if(BossesPlugin.isBoss(uuid))
         {
             e.setDroppedExp(0);
-            BossesPlugin.getBossFromUuid(uuid).onDeath(true, true);
+            BossesPlugin.getBossFromUuid(uuid).ifPresent(boss -> boss.onDeath(true, true));
         }
     }
 
@@ -35,46 +35,46 @@ public class BossListener implements Listener
     public void onBossDamage(EntityDamageByEntityEvent e)
     {
         String uuid = e.getEntity().getUniqueId().toString();
-        if(BossesPlugin.isBoss(uuid))
+
+        Optional<AbstractBoss> boss = BossesPlugin.getBossFromUuid(uuid);
+        if(!boss.isPresent())return;
+        if(e.getDamager() instanceof LivingEntity)
         {
-            AbstractBoss boss = BossesPlugin.getBossFromUuid(uuid);
-            if(e.getDamager() instanceof LivingEntity)
+            boss.get().onDamage(e, Optional.of((LivingEntity) e.getDamager()), false);
+            if(RandomUtil.chance(boss.get().getPowerChance()))
             {
-                boss.onDamage(e, Optional.of((LivingEntity) e.getDamager()), false);
-                if(RandomUtil.chance(boss.getPowerChance()))
-                {
-                    boss.runRandomPower(Lists.newArrayList((LivingEntity) e.getDamager()));
-                }
-            }
-            else if(e.getDamager() instanceof Arrow && ((Arrow) e.getDamager()).getShooter() instanceof LivingEntity)
-            {
-                boss.onDamage(e, Optional.of((LivingEntity) ((Arrow) e.getDamager()).getShooter()), true);
-                if(RandomUtil.chance(boss.getPowerChance()))
-                {
-                    boss.runRandomPower(Lists.newArrayList(((LivingEntity) ((Arrow) e.getDamager()).getShooter())));
-                }
+                boss.get().runRandomPower(Lists.newArrayList((LivingEntity) e.getDamager()));
             }
         }
+        else if(e.getDamager() instanceof Arrow && ((Arrow) e.getDamager()).getShooter() instanceof LivingEntity)
+        {
+            boss.get().onDamage(e, Optional.of((LivingEntity) ((Arrow) e.getDamager()).getShooter()), true);
+            if(RandomUtil.chance(boss.get().getPowerChance()))
+            {
+                boss.get().runRandomPower(Lists.newArrayList(((LivingEntity) ((Arrow) e.getDamager()).getShooter())));
+            }
+        }
+
     }
 
     @EventHandler
     public void onBossDamage(EntityDamageEvent e)
     {
         String uuid = e.getEntity().getUniqueId().toString();
-        if(BossesPlugin.isBoss(uuid))
+
+        Optional<AbstractBoss> boss = BossesPlugin.getBossFromUuid(uuid);
+        if(!boss.isPresent()) return;
+        if(e.getCause() != EntityDamageEvent.DamageCause.ENTITY_ATTACK)
         {
-            AbstractBoss boss = BossesPlugin.getBossFromUuid(uuid);
-            if(e.getCause() != EntityDamageEvent.DamageCause.ENTITY_ATTACK)
+            List<LivingEntity> entities = Lists.newArrayList();
+            e.getEntity().getWorld().getLivingEntities().stream().filter(ent -> ent.getLocation().distance(e.getEntity().getLocation()) < 10 && !ent.getUniqueId().toString().equals(e.getEntity().getUniqueId().toString())).forEach(entities::add);
+            boss.get().onDamage(e, Optional.empty(), false);
+            if(RandomUtil.chance(boss.get().getPowerChance()))
             {
-                List<LivingEntity> entities = Lists.newArrayList();
-                e.getEntity().getWorld().getLivingEntities().stream().filter(ent -> ent.getLocation().distance(e.getEntity().getLocation()) < 10 && !ent.getUniqueId().toString().equals(e.getEntity().getUniqueId().toString())).forEach(entities::add);
-                boss.onDamage(e, Optional.empty(), false);
-                if(RandomUtil.chance(boss.getPowerChance()))
-                {
-                    boss.runRandomPower(IPower.PowerType.PASSIVE, entities);
-                }
+                boss.get().runRandomPower(IPower.PowerType.PASSIVE, entities);
             }
         }
+
     }
 
     @EventHandler

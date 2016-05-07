@@ -25,6 +25,10 @@ public class SpawnTask
     {
        return Bukkit.getScheduler().scheduleSyncDelayedTask(Main.getPlugin(), ()->
         {
+            if(location.getBossInstance().isPresent() && location.getBossInstance().get().getEntity().getHealth() > 0)
+            {
+                return;
+            }
             location.setIfSpawned(false);
             boss.spawnBoss(location);
         }, time * 20);

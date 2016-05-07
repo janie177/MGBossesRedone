@@ -6,7 +6,6 @@ import com.minegusta.mgbossesredone.main.Main;
 import com.minegusta.mgbossesredone.registry.LocationRegistry;
 import org.bukkit.Bukkit;
 
-import java.util.Arrays;
 import java.util.stream.Collectors;
 
 public class ActivePowerTask {

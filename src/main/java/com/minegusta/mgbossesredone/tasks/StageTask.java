@@ -1,7 +1,7 @@
 package com.minegusta.mgbossesredone.tasks;
 
 import com.minegusta.mgbossesredone.main.Main;
-import com.minegusta.mgbossesredone.registry.BossRegistry;
+import com.minegusta.mgbossesredone.registry.LocationRegistry;
 import org.bukkit.Bukkit;
 
 public class StageTask
@@ -21,7 +21,7 @@ public class StageTask
     {
         id = Bukkit.getScheduler().scheduleSyncRepeatingTask(Main.getPlugin(), ()->
         {
-            BossRegistry.getBosses().stream().forEach(boss -> boss.updateStage(stageTick));
+            LocationRegistry.getLocations().stream().filter(l -> l.getBossInstance().isPresent()).forEach(boss -> boss.getBossInstance().get().updateStage(stageTick));
 
             stageTick++;
             if(stageTick > 9000) stageTick = 0;

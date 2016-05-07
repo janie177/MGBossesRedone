@@ -7,8 +7,12 @@ import com.minegusta.mgbossesredone.tasks.ActivePowerTask;
 import com.minegusta.mgbossesredone.tasks.BossEffectTask;
 import com.minegusta.mgbossesredone.tasks.StageTask;
 import org.bukkit.Bukkit;
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
+
+import java.util.Optional;
 
 public class Main extends JavaPlugin {
 
@@ -37,6 +41,22 @@ public class Main extends JavaPlugin {
         for(Commands c : Commands.values())
         {
             getCommand(c.getCommand()).setExecutor(c.getExecutor());
+        }
+
+        for(SpawnLocation l : LocationRegistry.getLocations())
+        {
+            for(Entity f : l.getLocation().getChunk().getEntities())
+            {
+                if(f instanceof LivingEntity)
+                {
+                    LivingEntity le = (LivingEntity) f;
+                    Optional<String> name = l.getBoss().getName();
+                    if(name.isPresent() && le.getCustomName() != null && le.getCustomName().equalsIgnoreCase(name.get()))
+                    {
+                        le.remove();
+                    }
+                }
+            }
         }
 
 

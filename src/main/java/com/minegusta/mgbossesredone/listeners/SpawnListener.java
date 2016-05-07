@@ -1,9 +1,11 @@
 package com.minegusta.mgbossesredone.listeners;
 
+import com.minegusta.mgbossesredone.api.BossesPlugin;
 import com.minegusta.mgbossesredone.api.bosses.AbstractBoss;
 import com.minegusta.mgbossesredone.api.locations.SpawnLocation;
-import com.minegusta.mgbossesredone.registry.BossRegistry;
 import com.minegusta.mgbossesredone.registry.LocationRegistry;
+import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.Chunk;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.EventHandler;
@@ -33,10 +35,12 @@ public class SpawnListener implements Listener
     @EventHandler
     public void onChunkUnload(ChunkUnloadEvent e)
     {
-        Arrays.asList(e.getChunk().getEntities()).stream().filter(ent -> ent instanceof LivingEntity && BossRegistry.isBoss(ent.getUniqueId().toString())).forEach(ent ->
+        LocationRegistry.getLocations().stream().forEach(l ->
         {
-            AbstractBoss boss = BossRegistry.getFromUuid(ent.getUniqueId().toString());
-            boss.onDeath(false, false);
+            if(l.getLocation().getChunk().getZ() == e.getChunk().getZ() && e.getChunk().getX() == l.getLocation().getChunk().getX())
+            {
+                l.getBossInstance().ifPresent(b -> b.onDeath(false, false));
+            }
         });
     }
 }

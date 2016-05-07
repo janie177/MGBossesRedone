@@ -7,9 +7,9 @@ import com.minegusta.mgbossesredone.api.powers.IPower;
 import com.minegusta.mgbossesredone.api.powers.Power;
 import com.minegusta.mgbossesredone.api.powers.PowerCollection;
 import com.minegusta.mgbossesredone.api.tasks.SpawnTask;
-import com.minegusta.mgbossesredone.registry.BossRegistry;
 import com.minegusta.mgbossesredone.registry.LocationRegistry;
 import net.md_5.bungee.api.ChatColor;
+import org.bukkit.Bukkit;
 import org.bukkit.Effect;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.ExperienceOrb;
@@ -55,6 +55,11 @@ public abstract class AbstractBoss
 
     public abstract int getExp();
 
+    public String getUUID()
+    {
+        return getEntity().getUniqueId().toString();
+    }
+
     public abstract EntityType getType();
 
     public abstract Boss getBossType();
@@ -72,7 +77,7 @@ public abstract class AbstractBoss
 
     public abstract Effect getEffectType();
 
-    public abstract double getHealth();
+    public abstract double getMaxHealth();
 
     public abstract void onSpawn();
 
@@ -81,6 +86,11 @@ public abstract class AbstractBoss
     public abstract String deathMessage();
 
     public abstract int getStageInterval();
+
+    public double getCurrentHealth()
+    {
+        return getEntity().getHealth();
+    }
 
     public PowerCollection getPowers()
     {
@@ -114,8 +124,12 @@ public abstract class AbstractBoss
 
     public void removeBoss()
     {
+        if(getCurrentHealth() > 0)
+        {
+            getEntity().damage(getEntity().getMaxHealth() + 100);
+            getEntity().remove();
+        }
         getSpawnLocation().setInstance(null);
-        BossRegistry.removeBoss(entity.getUniqueId().toString());
     }
 
     public abstract void onDamage(EntityDamageEvent e, Optional<LivingEntity> attacker, boolean arrow);
@@ -141,18 +155,16 @@ public abstract class AbstractBoss
         }
 
         LivingEntity boss = (LivingEntity) l.getLocation().getWorld().spawnEntity(l.getLocation(), getType());
-        boss.setMaxHealth(getHealth());
+        boss.setMaxHealth(getMaxHealth());
         boss.setCustomNameVisible(true);
         boss.setCustomName(getName());
         boss.setRemoveWhenFarAway(false);
         spawnLocationName = l.getName();
         this.entity = boss;
 
-        l.setInstance(getEntity().getUniqueId().toString());
+        l.setInstance(this);
 
         getStartingPowers().stream().forEach(this::addPower);
-
-        BossRegistry.createBoss(boss.getUniqueId().toString(), this);
 
         this.tables = getDropTables();
 

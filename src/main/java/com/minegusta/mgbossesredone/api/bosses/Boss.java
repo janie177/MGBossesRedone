@@ -3,6 +3,8 @@ package com.minegusta.mgbossesredone.api.bosses;
 import com.minegusta.mgbossesredone.api.bosses.bosses.Skeletor;
 import com.minegusta.mgbossesredone.api.locations.SpawnLocation;
 
+import java.util.Optional;
+
 public enum Boss {
 
     SKELETOR(Skeletor.class);
@@ -22,5 +24,17 @@ public enum Boss {
             oopsiefloopsie.printStackTrace();
         }
         return false;
+    }
+
+    public Optional<String> getName()
+    {
+        try
+        {
+            return Optional.of(boss.newInstance().getName());
+        } catch (Exception ignored)
+        {
+
+        }
+        return Optional.empty();
     }
 }
