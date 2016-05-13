@@ -1,6 +1,6 @@
 package com.minegusta.mgbossesredone.api.bosses;
 
-import com.minegusta.mgbossesredone.api.bosses.bosses.Skeletor;
+import com.minegusta.mgbossesredone.api.bosses.bosses.*;
 import com.minegusta.mgbossesredone.api.locations.SpawnLocation;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -8,7 +8,10 @@ import org.bukkit.ChatColor;
 import java.util.Optional;
 
 public enum Boss {
-
+    JW(com.minegusta.mgbossesredone.api.bosses.bosses.JW.class),
+    AZMODAN(Azmodan.class),
+    HYDRA(Hydra.class),
+    ZOMBIEKING(ZombieKing.class),
     SKELETOR(Skeletor.class);
 
     private Class<? extends AbstractBoss> boss;

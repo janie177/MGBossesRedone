@@ -9,7 +9,6 @@ import com.minegusta.mgbossesredone.api.powers.PowerCollection;
 import com.minegusta.mgbossesredone.api.tasks.SpawnTask;
 import com.minegusta.mgbossesredone.registry.LocationRegistry;
 import net.md_5.bungee.api.ChatColor;
-import org.bukkit.Bukkit;
 import org.bukkit.Effect;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.ExperienceOrb;
@@ -156,6 +155,7 @@ public abstract class AbstractBoss
 
         LivingEntity boss = (LivingEntity) l.getLocation().getWorld().spawnEntity(l.getLocation(), getType());
         boss.setMaxHealth(getMaxHealth());
+        boss.setHealth(boss.getMaxHealth());
         boss.setCustomNameVisible(true);
         boss.setCustomName(getName());
         boss.setRemoveWhenFarAway(false);
@@ -184,7 +184,7 @@ public abstract class AbstractBoss
 
     public void runpower(Power power, List<LivingEntity> target)
     {
-        power.getPower().run(entity, target);
+        power.getPower().run(, entity, target);
     }
 
     public void runRandomPower(IPower.PowerType type, List<LivingEntity> target)
@@ -192,7 +192,7 @@ public abstract class AbstractBoss
         Optional<Power> power = getPowers().getRandomPower(type);
         if(power.isPresent())
         {
-            power.get().getPower().run(entity, target);
+            power.get().getPower().run(, entity, target);
         }
     }
 
@@ -201,7 +201,7 @@ public abstract class AbstractBoss
         Optional<Power> power = getPowers().getRandomPower();
         if(power.isPresent())
         {
-            power.get().getPower().run(entity, target);
+            power.get().getPower().run(, entity, target);
         }
     }
 }

@@ -10,6 +10,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.Effect;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.Skeleton;
 import org.bukkit.event.entity.EntityDamageEvent;
 
 import java.util.List;
@@ -29,12 +30,12 @@ public class Skeletor extends AbstractBoss {
 
     @Override
     public int getSpecialAttackInterval() {
-        return 3;
+        return 10;
     }
 
     @Override
     public int getExp() {
-        return 6;
+        return 4;
     }
 
     @Override
@@ -59,7 +60,7 @@ public class Skeletor extends AbstractBoss {
 
     @Override
     public List<Power> getStartingPowers() {
-        return Lists.newArrayList(Power.TAUNT);
+        return Lists.newArrayList(Power.TAUNT, Power.ARROWRAIN, Power.ARROWSPRAY, Power.EXPLODINGBATS, Power.PULL);
     }
 
     @Override
@@ -74,7 +75,8 @@ public class Skeletor extends AbstractBoss {
 
     @Override
     public void onSpawn() {
-
+        Skeleton s = (Skeleton) getEntity();
+        s.setSkeletonType(Skeleton.SkeletonType.WITHER);
     }
 
     @Override

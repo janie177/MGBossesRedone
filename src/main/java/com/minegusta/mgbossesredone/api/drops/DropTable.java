@@ -1,7 +1,7 @@
 package com.minegusta.mgbossesredone.api.drops;
 
 import com.minegusta.mgbossesredone.api.drops.tables.normal.*;
-import com.minegusta.mgbossesredone.api.drops.tables.special.SkeletorLoot;
+import com.minegusta.mgbossesredone.api.drops.tables.special.*;
 import com.minegusta.mgbossesredone.api.util.RandomUtil;
 import org.bukkit.inventory.ItemStack;
 
@@ -13,6 +13,10 @@ public enum DropTable {
     ORE(new OreDrops()),
     JUNK(new Junk()),
     SKELETOR_SPECIAL(new SkeletorLoot()),
+    AZMODAN_SPECIAL(new AzmodanLoot()),
+    HYDRA_SPECIAL(new HydraLoot()),
+    JW_SPECIAL(new JWLoot()),
+    ZOMBIE_KING_SPECIAL(new ZombieKingLoot()),
     ARMOUR(new ArmourLoot()),
     TOOL(new ToolLoot()),
     BUILDBLOCKS(new BuildBlockLoot()),

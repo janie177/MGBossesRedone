@@ -1,9 +1,8 @@
-package com.minegusta.mgbossesredone.api.powers.powers;
+package com.minegusta.mgbossesredone.api.powers.powers.bossspecific.skeletor;
 
 import com.minegusta.mgbossesredone.api.powers.IPower;
 import com.minegusta.mgbossesredone.api.util.ChatUtil;
 import com.minegusta.mgbossesredone.api.util.RandomUtil;
-import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 
 import java.util.List;
@@ -20,7 +19,7 @@ public class Taunt implements IPower {
     }
 
     @Override
-    public void run(Entity boss, List<LivingEntity> target) {
+    public void run(LivingEntity boss, List<LivingEntity> target) {
 
         target.stream().forEach(t -> ChatUtil.sendBossMessage(boss.getName(), t, taunts[RandomUtil.randomNumberZeroIncludedMaxExcluded(taunts.length)]));
     }

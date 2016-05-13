@@ -94,6 +94,13 @@ public class PowerCollection {
         }
     }
 
+    public void clearPowers()
+    {
+        actives.clear();
+        passives.clear();
+        specials.clear();
+    }
+
     public List<Power> getPassives()
     {
         return passives;
