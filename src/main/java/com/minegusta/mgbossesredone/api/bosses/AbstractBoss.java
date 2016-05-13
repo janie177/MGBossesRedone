@@ -147,9 +147,9 @@ public abstract class AbstractBoss
         removeBoss();
     }
 
-    public boolean spawn(SpawnLocation l)
+    public synchronized boolean spawn(SpawnLocation l)
     {
-        if(!l.getLocation().getChunk().isLoaded())
+        if(!l.getLocation().getChunk().isLoaded() || LocationRegistry.getSpawnLocation(l.getName()).getIfSpawned())
         {
             return false;
         }

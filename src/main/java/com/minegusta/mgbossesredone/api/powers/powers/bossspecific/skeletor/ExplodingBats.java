@@ -52,7 +52,7 @@ public class ExplodingBats implements IPower {
 						{
 							Vector v = bats.get(b).getLocation().toVector().subtract(b.getLocation().toVector());
 							v.normalize();
-							b.setVelocity(v.multiply(0.5));
+							b.setVelocity(v);
 						}
 					});
 				}, i);

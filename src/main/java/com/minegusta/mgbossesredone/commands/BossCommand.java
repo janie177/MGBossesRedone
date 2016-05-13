@@ -44,10 +44,9 @@ public class BossCommand implements CommandExecutor {
                 int id;
                 if((id = spawn.getTaskId()) != -1)
                 {
-                    if(Bukkit.getScheduler().isQueued(id))
-                    {
+                    try {
                         Bukkit.getScheduler().cancelTask(id);
-                    }
+                    } catch (Exception ignored){}
                 }
                 LocationRegistry.remove(args[1]);
                 ConfigManager.saveLocationsConfig(f);
