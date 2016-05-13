@@ -1,6 +1,7 @@
 package com.minegusta.mgbossesredone.api.bosses;
 
 import com.google.common.collect.Lists;
+import com.minegusta.mgbossesredone.api.BossesPlugin;
 import com.minegusta.mgbossesredone.api.drops.DropTable;
 import com.minegusta.mgbossesredone.api.locations.SpawnLocation;
 import com.minegusta.mgbossesredone.api.powers.IPower;
@@ -170,7 +171,7 @@ public abstract class AbstractBoss
 
         LocationRegistry.getSpawnLocation(l.getName()).setIfSpawned(true);
 
-        entity.getWorld().getLivingEntities().stream().filter(ent -> entity.getCustomName().equalsIgnoreCase(ent.getCustomName()) && ent.isValid() && ent.getLocation().distance(entity.getLocation()) < 100).forEach(ent ->
+        entity.getWorld().getLivingEntities().stream().filter(ent -> entity.getCustomName().equalsIgnoreCase(ent.getCustomName()) && ent.isValid() && ent.getLocation().distance(entity.getLocation()) < 100 && !ent.getUniqueId().toString().equalsIgnoreCase(entity.getUniqueId().toString()) && !BossesPlugin.isBoss(ent.getUniqueId().toString())).forEach(ent ->
         {
             ent.damage(ent.getMaxHealth() + 100);
             ent.remove();
