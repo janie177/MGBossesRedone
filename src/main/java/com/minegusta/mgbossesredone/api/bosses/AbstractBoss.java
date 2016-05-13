@@ -184,7 +184,7 @@ public abstract class AbstractBoss
 
     public void runpower(Power power, List<LivingEntity> target)
     {
-        power.getPower().run(, entity, target);
+        power.getPower().run(entity, target);
     }
 
     public void runRandomPower(IPower.PowerType type, List<LivingEntity> target)
@@ -192,7 +192,7 @@ public abstract class AbstractBoss
         Optional<Power> power = getPowers().getRandomPower(type);
         if(power.isPresent())
         {
-            power.get().getPower().run(, entity, target);
+            power.get().getPower().run(entity, target);
         }
     }
 
@@ -201,7 +201,7 @@ public abstract class AbstractBoss
         Optional<Power> power = getPowers().getRandomPower();
         if(power.isPresent())
         {
-            power.get().getPower().run(, entity, target);
+            power.get().getPower().run(entity, target);
         }
     }
 }
