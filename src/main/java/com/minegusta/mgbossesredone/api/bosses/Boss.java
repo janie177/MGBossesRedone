@@ -1,9 +1,10 @@
 package com.minegusta.mgbossesredone.api.bosses;
 
-import com.minegusta.mgbossesredone.api.bosses.bosses.*;
+import com.minegusta.mgbossesredone.api.bosses.bosses.Azmodan;
+import com.minegusta.mgbossesredone.api.bosses.bosses.Hydra;
+import com.minegusta.mgbossesredone.api.bosses.bosses.Skeletor;
+import com.minegusta.mgbossesredone.api.bosses.bosses.ZombieKing;
 import com.minegusta.mgbossesredone.api.locations.SpawnLocation;
-import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 
 import java.util.Optional;
 

@@ -7,7 +7,6 @@ import com.minegusta.mgbossesredone.api.drops.DropTable;
 import com.minegusta.mgbossesredone.api.powers.Power;
 import org.bukkit.ChatColor;
 import org.bukkit.Effect;
-import org.bukkit.Particle;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.entity.EntityDamageEvent;

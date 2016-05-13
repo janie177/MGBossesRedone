@@ -1,8 +1,6 @@
 package com.minegusta.mgbossesredone.api.powers;
 
 import com.google.common.collect.Lists;
-import com.minegusta.mgbossesredone.api.powers.IPower;
-import com.minegusta.mgbossesredone.api.powers.Power;
 import com.minegusta.mgbossesredone.api.util.RandomUtil;
 
 import java.util.List;

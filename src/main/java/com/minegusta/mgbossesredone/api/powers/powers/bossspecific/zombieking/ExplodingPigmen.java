@@ -2,7 +2,6 @@ package com.minegusta.mgbossesredone.api.powers.powers.bossspecific.zombieking;
 
 import com.google.common.collect.Lists;
 import com.minegusta.mgbossesredone.api.powers.IPower;
-import com.minegusta.mgbossesredone.api.util.RandomUtil;
 import com.minegusta.mgbossesredone.main.Main;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;

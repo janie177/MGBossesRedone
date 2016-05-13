@@ -15,8 +15,6 @@ import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 
-import java.util.Optional;
-
 public class BossCommand implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender s, Command command, String label, String[] args)

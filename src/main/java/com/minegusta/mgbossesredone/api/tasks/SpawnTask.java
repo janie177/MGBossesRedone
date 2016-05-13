@@ -1,11 +1,9 @@
 package com.minegusta.mgbossesredone.api.tasks;
 
-import com.minegusta.mgbossesredone.api.bosses.AbstractBoss;
 import com.minegusta.mgbossesredone.api.bosses.Boss;
 import com.minegusta.mgbossesredone.api.locations.SpawnLocation;
 import com.minegusta.mgbossesredone.main.Main;
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 
 public class SpawnTask
 {
