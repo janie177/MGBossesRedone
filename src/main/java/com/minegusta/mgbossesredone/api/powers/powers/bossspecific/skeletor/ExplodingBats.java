@@ -66,6 +66,7 @@ public class ExplodingBats implements IPower {
 					bats.keySet().stream().filter(LivingEntity::isValid).forEach(b ->
 					{
 						b.getWorld().createExplosion(b.getLocation().getX(), b.getLocation().getY(), b.getLocation().getZ(), 4, false, false);
+						if(b.isValid())b.remove();
 					});
 				}, i);
 			}
