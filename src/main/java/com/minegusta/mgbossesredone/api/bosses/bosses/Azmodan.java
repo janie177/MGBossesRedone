@@ -96,7 +96,7 @@ public class Azmodan extends AbstractBoss {
 
 	@Override
 	public int getStageInterval() {
-		return 15;
+		return 20;
 	}
 
 	@Override

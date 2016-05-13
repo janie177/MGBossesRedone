@@ -5,6 +5,7 @@ import com.minegusta.mgbossesredone.api.BossesPlugin;
 import com.minegusta.mgbossesredone.api.bosses.AbstractBoss;
 import com.minegusta.mgbossesredone.api.powers.IPower;
 import com.minegusta.mgbossesredone.api.util.RandomUtil;
+import org.bukkit.ChatColor;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.EventHandler;
@@ -45,6 +46,11 @@ public class BossListener implements Listener
         }
         else if(e.getDamager() instanceof Arrow && ((Arrow) e.getDamager()).getShooter() instanceof LivingEntity)
         {
+            if(e.getDamager().getLocation().distance(e.getEntity().getLocation()) > 30)
+            {
+                e.setCancelled(true);
+                e.getDamager().sendMessage(ChatColor.RED + "You are too far away to damage that boss!");
+            }
             boss.get().onDamage(e, Optional.of((LivingEntity) ((Arrow) e.getDamager()).getShooter()), true);
             if(RandomUtil.chance(boss.get().getPowerChance()))
             {
@@ -64,7 +70,7 @@ public class BossListener implements Listener
         if(e.getCause() != EntityDamageEvent.DamageCause.ENTITY_ATTACK)
         {
             List<LivingEntity> entities = Lists.newArrayList();
-            e.getEntity().getWorld().getLivingEntities().stream().filter(ent -> ent.getLocation().distance(e.getEntity().getLocation()) < 10 && !ent.getUniqueId().toString().equals(e.getEntity().getUniqueId().toString())).forEach(entities::add);
+            e.getEntity().getWorld().getLivingEntities().stream().filter(ent -> ent.getLocation().distance(e.getEntity().getLocation()) < 30 && !ent.getUniqueId().toString().equals(e.getEntity().getUniqueId().toString())).forEach(entities::add);
             boss.get().onDamage(e, Optional.empty(), false);
             if(RandomUtil.chance(boss.get().getPowerChance()))
             {

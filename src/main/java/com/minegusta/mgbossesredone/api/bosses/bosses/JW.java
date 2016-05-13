@@ -22,12 +22,12 @@ public class JW extends AbstractBoss {
 
 	@Override
 	public int getSpecialAttackRadius() {
-		return 20;
+		return 30;
 	}
 
 	@Override
 	public int getSpecialAttackInterval() {
-		return 10;
+		return 5;
 	}
 
 	@Override
@@ -47,7 +47,7 @@ public class JW extends AbstractBoss {
 
 	@Override
 	public int getPowerChance() {
-		return 50;
+		return 100;
 	}
 
 	@Override
