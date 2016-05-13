@@ -41,7 +41,7 @@ public class BossListener implements Listener
             boss.get().onDamage(e, Optional.of((LivingEntity) e.getDamager()), false);
             if(RandomUtil.chance(boss.get().getPowerChance()))
             {
-                boss.get().runRandomPower(Lists.newArrayList((LivingEntity) e.getDamager()));
+                boss.get().runRandomPower(IPower.PowerType.ACTIVE, Lists.newArrayList((LivingEntity) e.getDamager()));
             }
         }
         else if(e.getDamager() instanceof Arrow && ((Arrow) e.getDamager()).getShooter() instanceof LivingEntity)
@@ -54,7 +54,7 @@ public class BossListener implements Listener
             boss.get().onDamage(e, Optional.of((LivingEntity) ((Arrow) e.getDamager()).getShooter()), true);
             if(RandomUtil.chance(boss.get().getPowerChance()))
             {
-                boss.get().runRandomPower(Lists.newArrayList(((LivingEntity) ((Arrow) e.getDamager()).getShooter())));
+                boss.get().runRandomPower(IPower.PowerType.ACTIVE, Lists.newArrayList(((LivingEntity) ((Arrow) e.getDamager()).getShooter())));
             }
         }
 

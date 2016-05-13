@@ -28,16 +28,17 @@ public class ExplodingBats implements IPower {
 
 	@Override
 	public void run(LivingEntity boss, List<LivingEntity> target) {
+		if(target.isEmpty())return;
 		ConcurrentMap<LivingEntity, LivingEntity> bats = Maps.newConcurrentMap();
 		for(int i = 0; i < 3; i++)
 		{
 			Bat b = (Bat) boss.getWorld().spawnEntity(boss.getLocation(), EntityType.BAT);
 			b.setCustomNameVisible(true);
 			b.setCustomName(ChatColor.RED + "Exploding Bat");
-			bats.put(b, target.get(RandomUtil.randomNumberZeroIncludedMaxExcluded(target.size())));
+			bats.put(b, target.get(target.size() == 1 ? 0 : RandomUtil.randomNumberZeroIncludedMaxExcluded(target.size())));
 		}
 
-		for(int i = 0; i <= 20 * 6; i++)
+		for(int i = 0; i <= 20 * 5; i++)
 		{
 			//set velocity
 			if(i % 4 == 0)
@@ -58,12 +59,15 @@ public class ExplodingBats implements IPower {
 			}
 
 			//explode
-			if(i == 20 * 6)
+			if(i == 20 * 5)
 			{
-				bats.keySet().stream().filter(LivingEntity::isValid).forEach(b ->
+				Bukkit.getScheduler().scheduleSyncDelayedTask(Main.getPlugin(), () ->
 				{
-					b.getWorld().createExplosion(b.getLocation().getX(), b.getLocation().getY(), b.getLocation().getZ(), 4, false, false);
-				});
+					bats.keySet().stream().filter(LivingEntity::isValid).forEach(b ->
+					{
+						b.getWorld().createExplosion(b.getLocation().getX(), b.getLocation().getY(), b.getLocation().getZ(), 4, false, false);
+					});
+				}, i);
 			}
 		}
 	}
