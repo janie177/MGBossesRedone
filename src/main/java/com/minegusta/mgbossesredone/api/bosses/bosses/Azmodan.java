@@ -117,6 +117,7 @@ public class Azmodan extends AbstractBoss {
 			if(stage != Stage.FINAL)
 			{
 				stage = Stage.FINAL;
+				effect = Effect.MOBSPAWNER_FLAMES;
 				getPowers().clearPowers();
 				finalPowers.stream().forEach(this::addPower);
 			}
@@ -126,6 +127,7 @@ public class Azmodan extends AbstractBoss {
 			//Make earth stage
 			getPowers().clearPowers();
 			stage = Stage.EARTH;
+			effect = Effect.MOBSPAWNER_FLAMES;
 			earthPowers.stream().forEach(this::addPower);
 		}
 		else if(stage == Stage.EARTH)
@@ -133,6 +135,7 @@ public class Azmodan extends AbstractBoss {
 			//Make ice stage
 			getPowers().clearPowers();
 			stage = Stage.ICE;
+			effect = Effect.VILLAGER_THUNDERCLOUD;
 			icePowers.stream().forEach(this::addPower);
 		}
 		else if(stage == Stage.ICE)
@@ -140,6 +143,7 @@ public class Azmodan extends AbstractBoss {
 			//Make fire stage
 			getPowers().clearPowers();
 			stage = Stage.FIRE;
+			effect = Effect.SNOWBALL_BREAK;
 			firePowers.stream().forEach(this::addPower);
 		}
 	}
