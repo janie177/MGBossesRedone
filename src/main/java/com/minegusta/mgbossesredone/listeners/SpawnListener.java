@@ -1,7 +1,9 @@
 package com.minegusta.mgbossesredone.listeners;
 
 import com.minegusta.mgbossesredone.api.locations.SpawnLocation;
+import com.minegusta.mgbossesredone.main.Main;
 import com.minegusta.mgbossesredone.registry.LocationRegistry;
+import org.bukkit.Bukkit;
 import org.bukkit.Chunk;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -20,7 +22,7 @@ public class SpawnListener implements Listener
             Chunk eventChunk = e.getChunk();
             if(chunk.getX() == eventChunk.getX() && chunk.getZ() == eventChunk.getZ())
             {
-                l.getBoss().spawnBoss(l);
+                Bukkit.getScheduler().scheduleSyncDelayedTask(Main.getPlugin(), ()-> l.getBoss().spawnBoss(l), 40);
             }
         }
     }

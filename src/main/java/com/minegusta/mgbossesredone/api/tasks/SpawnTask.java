@@ -27,6 +27,11 @@ public class SpawnTask
             {
                 return;
             }
+            else if(!location.getLocation().getChunk().isLoaded())
+            {
+                location.setIfSpawned(false);
+                return;
+            }
             location.setIfSpawned(false);
             boss.spawnBoss(location);
         }, time * 20);
