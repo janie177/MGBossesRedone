@@ -21,6 +21,7 @@ public class ArrowSpray implements IPower {
 
 	@Override
 	public void run(LivingEntity boss, List<LivingEntity> target) {
+		if(target.isEmpty())return;
 		LivingEntity t = target.get(0);
 		for(int i = 0; i < 10; i++)
 		{

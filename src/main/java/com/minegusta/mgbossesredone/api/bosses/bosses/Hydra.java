@@ -9,6 +9,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.Effect;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.Zombie;
 import org.bukkit.event.entity.EntityDamageEvent;
 
 import java.util.List;
@@ -67,12 +68,12 @@ public class Hydra extends AbstractBoss {
 
 	@Override
 	public double getMaxHealth() {
-		return 200;
+		return 80;
 	}
 
 	@Override
 	public void onSpawn() {
-
+		((Zombie)getEntity()).setVillagerProfession(null);
 	}
 
 	@Override

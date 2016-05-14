@@ -21,7 +21,7 @@ public class Duplicate implements IPower {
 
 	@Override
 	public void run(LivingEntity boss, List<LivingEntity> target) {
-		for(int i = 0; i < 3; i++)
+		for(int i = 0; i < 2; i++)
 		{
 			Zombie z = (Zombie) boss.getWorld().spawnEntity(boss.getLocation(), EntityType.ZOMBIE);
 			z.setCustomName(ChatColor.GREEN + "Hydra Clone");

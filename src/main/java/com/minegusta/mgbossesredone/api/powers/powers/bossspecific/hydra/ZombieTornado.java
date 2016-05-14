@@ -25,6 +25,7 @@ public class ZombieTornado implements IPower {
 
 	@Override
 	public void run(LivingEntity boss, List<LivingEntity> target) {
+		if(target.isEmpty())return;
 		createWind(boss.getLocation(), 4, target.get(0));
 	}
 

@@ -75,7 +75,7 @@ public class Azmodan extends AbstractBoss {
 
 	@Override
 	public double getMaxHealth() {
-		return 1000;
+		return 650;
 	}
 
 	@Override
@@ -110,7 +110,7 @@ public class Azmodan extends AbstractBoss {
 
 	private void updateStage()
 	{
-		if(getEntity().getHealth() < 200)
+		if(getEntity().getHealth() < 100)
 		{
 			//Make final stage
 			if(stage != Stage.FINAL)

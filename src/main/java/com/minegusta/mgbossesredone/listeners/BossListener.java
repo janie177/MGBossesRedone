@@ -8,6 +8,7 @@ import com.minegusta.mgbossesredone.api.util.RandomUtil;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.ThrownPotion;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByBlockEvent;
@@ -57,6 +58,17 @@ public class BossListener implements Listener
                 boss.get().runRandomPower(IPower.PowerType.ACTIVE, Lists.newArrayList(((LivingEntity) ((Arrow) e.getDamager()).getShooter())));
             }
         }
+        else if(e.getCause() == EntityDamageEvent.DamageCause.MAGIC)
+        {
+            if(e.getDamager() instanceof ThrownPotion)
+            {
+                ThrownPotion p = (ThrownPotion) e.getDamager();
+                if(p.getShooter() instanceof LivingEntity && RandomUtil.chance(boss.get().getPowerChance()))
+                {
+                    boss.get().runRandomPower(IPower.PowerType.ACTIVE, Lists.newArrayList((LivingEntity)((ThrownPotion) e.getDamager()).getShooter()));
+                }
+            }
+        }
 
     }
 
@@ -67,7 +79,7 @@ public class BossListener implements Listener
 
         Optional<AbstractBoss> boss = BossesPlugin.getBossFromUuid(uuid);
         if(!boss.isPresent()) return;
-        if(e.getCause() != EntityDamageEvent.DamageCause.ENTITY_ATTACK)
+        if(e.getCause() != EntityDamageEvent.DamageCause.ENTITY_ATTACK && e.getCause() != EntityDamageEvent.DamageCause.PROJECTILE && e.getCause() != EntityDamageEvent.DamageCause.MAGIC)
         {
             List<LivingEntity> entities = Lists.newArrayList();
             e.getEntity().getWorld().getLivingEntities().stream().filter(ent -> ent.getLocation().distance(e.getEntity().getLocation()) < 30 && !ent.getUniqueId().toString().equals(e.getEntity().getUniqueId().toString())).forEach(entities::add);

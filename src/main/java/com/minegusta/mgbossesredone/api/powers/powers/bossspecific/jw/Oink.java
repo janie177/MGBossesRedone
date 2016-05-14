@@ -24,10 +24,11 @@ public class Oink implements IPower {
 
 	@Override
 	public void run(LivingEntity boss, List<LivingEntity> target) {
+		if(target.isEmpty()) return;
 		Vector v = target.get(0).getLocation().toVector().subtract(boss.getLocation().toVector());
-		Pig pig = (Pig) boss.getWorld().spawnEntity(boss.getLocation().clone().add(0,3,0), EntityType.PIG);
+		Pig pig = (Pig) boss.getWorld().spawnEntity(boss.getLocation().clone().add(0,1,0), EntityType.PIG);
 		pig.setBaby();
-		pig.setVelocity(v.multiply(2.6));
+		pig.setVelocity(v.multiply(1.5));
 
 		Bukkit.getScheduler().scheduleSyncDelayedTask(Main.getPlugin(), ()->
 		{
@@ -37,6 +38,6 @@ public class Oink implements IPower {
 				pig.getWorld().createExplosion(pig.getLocation().getX(), pig.getLocation().getY(), pig.getLocation().getZ(), 4, false, false);
 				pig.remove();
 			}
-		}, 40);
+		}, 60);
 	}
 }

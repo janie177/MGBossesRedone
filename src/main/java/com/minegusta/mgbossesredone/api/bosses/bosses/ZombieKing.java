@@ -67,7 +67,7 @@ public class ZombieKing extends AbstractBoss {
 
 	@Override
 	public double getMaxHealth() {
-		return 500;
+		return 130;
 	}
 
 	@Override

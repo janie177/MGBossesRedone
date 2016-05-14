@@ -19,7 +19,8 @@ public class ShootArrow implements IPower {
 
 	@Override
 	public void run(LivingEntity boss, List<LivingEntity> target) {
+		if(target.isEmpty())return;
 		Vector v = target.get(0).getLocation().toVector().subtract(boss.getLocation().toVector());
-		boss.getWorld().spawnArrow(boss.getLocation().clone().add(0,2,0), v, 0.6F, 0F);
+		boss.getWorld().spawnArrow(boss.getLocation().clone().add(0,2,0), v, 1.0F, 0F);
 	}
 }
