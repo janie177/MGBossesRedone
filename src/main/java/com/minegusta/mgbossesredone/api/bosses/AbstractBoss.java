@@ -173,8 +173,8 @@ public abstract class AbstractBoss
 
         entity.getWorld().getLivingEntities().stream().filter(ent -> entity.getCustomName().equalsIgnoreCase(ent.getCustomName()) && ent.isValid() && ent.getLocation().distance(entity.getLocation()) < 100 && !ent.getUniqueId().toString().equalsIgnoreCase(entity.getUniqueId().toString()) && !BossesPlugin.isBoss(ent.getUniqueId().toString())).forEach(ent ->
         {
-            Optional<AbstractBoss> b = BossesPlugin.getBossFromUuid(ent.getUniqueId().toString());
-            if(b.isPresent())b.get().onDeath(false, false, false);
+            ent.damage(ent.getMaxHealth() + 100);
+            ent.remove();
         });
 
         onSpawn();
