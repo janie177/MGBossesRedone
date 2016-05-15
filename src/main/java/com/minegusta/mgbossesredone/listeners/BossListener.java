@@ -8,6 +8,7 @@ import com.minegusta.mgbossesredone.api.util.RandomUtil;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.Player;
 import org.bukkit.entity.ThrownPotion;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -25,13 +26,11 @@ public class BossListener implements Listener
     @EventHandler
     public void onBossDeath(EntityDeathEvent e)
     {
-        String uuid = e.getEntity().getUniqueId().toString();
-
-        BossesPlugin.getBossFromUuid(uuid).ifPresent(boss ->
+        if(!(e instanceof Player) && e.getEntity().isCustomNameVisible() && ChatColor.stripColor(e.getEntity().getCustomName()).startsWith("[Boss]"))
         {
             e.setDroppedExp(0);
-            boss.onDeath(true, true, true);
-        });
+            e.getDrops().clear();
+        }
     }
 
     @EventHandler
@@ -83,6 +82,7 @@ public class BossListener implements Listener
 
         Optional<AbstractBoss> boss = BossesPlugin.getBossFromUuid(uuid);
         if(!boss.isPresent()) return;
+        boss.get().checkDeath(e);
         if(e.getCause() != EntityDamageEvent.DamageCause.ENTITY_ATTACK && e.getCause() != EntityDamageEvent.DamageCause.PROJECTILE && e.getCause() != EntityDamageEvent.DamageCause.MAGIC)
         {
             List<LivingEntity> entities = Lists.newArrayList();

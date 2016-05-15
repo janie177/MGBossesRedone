@@ -132,6 +132,14 @@ public abstract class AbstractBoss
         getSpawnLocation().setInstance(null);
     }
 
+    public void checkDeath(EntityDamageEvent e)
+    {
+        if(entity.getHealth() - e.getDamage() < 1)
+        {
+            onDeath(true, true, true);
+        }
+    }
+
     public abstract void onDamage(EntityDamageEvent e, Optional<LivingEntity> attacker, boolean arrow);
 
     public void onDeath(boolean loot, boolean respawn, boolean message)
@@ -158,7 +166,7 @@ public abstract class AbstractBoss
         boss.setMaxHealth(getMaxHealth());
         boss.setHealth(boss.getMaxHealth());
         boss.setCustomNameVisible(true);
-        boss.setCustomName(getName());
+        boss.setCustomName(org.bukkit.ChatColor.DARK_RED  + "[" + org.bukkit.ChatColor.RED + "Boss" + org.bukkit.ChatColor.DARK_RED + "]" + getName());
         boss.setRemoveWhenFarAway(false);
         spawnLocationName = l.getName();
         this.entity = boss;
