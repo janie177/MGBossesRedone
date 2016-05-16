@@ -6,10 +6,9 @@ import com.minegusta.mgbossesredone.api.powers.powers.bossspecific.azmodan.earth
 import com.minegusta.mgbossesredone.api.powers.powers.bossspecific.azmodan.earth.Quake;
 import com.minegusta.mgbossesredone.api.powers.powers.bossspecific.azmodan.fire.FieryExplosion;
 import com.minegusta.mgbossesredone.api.powers.powers.bossspecific.azmodan.fire.FireStorm;
-import com.minegusta.mgbossesredone.api.powers.powers.bossspecific.azmodan.fire.SpewLava;
+import com.minegusta.mgbossesredone.api.powers.powers.bossspecific.azmodan.fire.BlazeStorm;
 import com.minegusta.mgbossesredone.api.powers.powers.bossspecific.azmodan.ice.Freeze;
 import com.minegusta.mgbossesredone.api.powers.powers.bossspecific.azmodan.ice.IceMinions;
-import com.minegusta.mgbossesredone.api.powers.powers.bossspecific.azmodan.ice.IceProjectiles;
 import com.minegusta.mgbossesredone.api.powers.powers.bossspecific.azmodan.ice.TidalWave;
 import com.minegusta.mgbossesredone.api.powers.powers.bossspecific.azmodan.lastphase.*;
 import com.minegusta.mgbossesredone.api.powers.powers.bossspecific.hydra.Duplicate;
@@ -36,10 +35,9 @@ public enum Power {
     QUAKE(new Quake()),
     FIERYEXPLOSION(new FieryExplosion()),
     FIRESTORM(new FireStorm()),
-    SPEWLAVA(new SpewLava()),
+    SPEWLAVA(new BlazeStorm()),
     FREEZE(new Freeze()),
     ICEMINIONS(new IceMinions()),
-    ICEPROJECTILES(new IceProjectiles()),
     TIDALWAVE(new TidalWave()),
     EXPLOSIONCIRCLE(new ExplosionCircle()),
     NUKE(new Nuke()),

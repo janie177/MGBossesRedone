@@ -47,7 +47,7 @@ public class Azmodan extends AbstractBoss {
 
 	@Override
 	public int getPowerChance() {
-		return 40;
+		return 25;
 	}
 
 	@Override
@@ -64,7 +64,7 @@ public class Azmodan extends AbstractBoss {
 	private Stage stage = Stage.ICE;
 	private List<Power> firePowers = Lists.newArrayList(Power.FIERYEXPLOSION, Power.FIRESTORM, Power.SPEWLAVA, Power.PULL);
 	private List<Power> earthPowers = Lists.newArrayList(Power.EARTHMINIONS, Power.ENTOMB, Power.POISONPOOL, Power.QUAKE, Power.PULL);
-	private List<Power> icePowers = Lists.newArrayList(Power.FREEZE, Power.ICEMINIONS, Power.ICEPROJECTILES, Power.TIDALWAVE, Power.PULL);
+	private List<Power> icePowers = Lists.newArrayList(Power.FREEZE, Power.ICEMINIONS, Power.TIDALWAVE, Power.PULL);
 	private List<Power> finalPowers = Lists.newArrayList(Power.AZMODANMINIONS, Power.EXPLOSIONCIRCLE, Power.NUKE, Power.REMOVEARMOUR, Power.WEAKEN, Power.PULL);
 
 
