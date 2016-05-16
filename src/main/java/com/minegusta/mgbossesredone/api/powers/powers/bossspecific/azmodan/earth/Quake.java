@@ -4,6 +4,7 @@ import com.minegusta.mgbossesredone.api.powers.IPower;
 import com.minegusta.mgbossesredone.api.util.RandomUtil;
 import com.minegusta.mgbossesredone.main.Main;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -28,14 +29,15 @@ public class Quake implements IPower {
 
 	@Override
 	public void run(LivingEntity boss, List<LivingEntity> target) {
-		task(boss.getLocation(), 8, 20, 2);
+		task(boss.getLocation(), 8, 20, 2, boss);
+		boss.getWorld().getPlayers().stream().filter(p -> p.getLocation().distance(boss.getLocation()) <= 30).forEach(p -> p.sendMessage(ChatColor.RED + "Earthquake!!"));
 	}
 
-	private void task(final Location l, int duration, final int radius, final double strength) {
+	private void task(final Location l, int duration, final int radius, final double strength, LivingEntity boss) {
 		for (int i = 0; i <= 20 * duration; i++) {
 			if (i % 4 == 0) {
 				Bukkit.getScheduler().scheduleSyncDelayedTask(Main.getPlugin(), () -> {
-					shake(l, radius, strength);
+					shake(l, radius, strength, boss);
 					if (RandomUtil.chance(30)) {
 						double x = RandomUtil.randomNumberZeroIncludedMaxExcluded(2 * radius) - radius;
 						double z = RandomUtil.randomNumberZeroIncludedMaxExcluded(2 * radius) - radius;
@@ -46,9 +48,9 @@ public class Quake implements IPower {
 		}
 	}
 
-	private void shake(final Location l, int radius, double strength) {
+	private void shake(final Location l, int radius, double strength, LivingEntity boss) {
 		l.getWorld().getEntitiesByClasses(LivingEntity.class, Item.class).stream().
-				filter(ent -> ent.getLocation().distance(l) <= radius).
+				filter(ent -> ent.getLocation().distance(l) <= radius && !ent.getUniqueId().toString().equalsIgnoreCase(boss.getUniqueId().toString())).
 		        forEach(ent -> {
 			double range = strength * 0.6;
 			double min = range / 2;

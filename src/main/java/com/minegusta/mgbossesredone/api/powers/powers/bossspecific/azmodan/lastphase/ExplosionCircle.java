@@ -40,7 +40,7 @@ public class ExplosionCircle implements IPower {
 			},20 * i);
 		}
 
-		for(int i = locations.size(); i >= locations.size() / 2; i--)
+		for(int i = locations.size() - 1; i >= locations.size() / 2; i--)
 		{
 			final int k = i;
 			Bukkit.getScheduler().scheduleSyncDelayedTask(Main.getPlugin(), ()-> {

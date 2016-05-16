@@ -55,6 +55,6 @@ public class Entomb implements IPower {
 			blocks.stream().forEach(b -> {
 				if(b.getType() == Material.STONE) b.setType(Material.AIR);
 			});
-		}, 20 * 40);
+		}, 20 * 4);
 	}
 }

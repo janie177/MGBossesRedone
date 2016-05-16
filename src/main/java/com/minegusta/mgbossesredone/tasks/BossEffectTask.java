@@ -12,7 +12,7 @@ public class BossEffectTask
     {
         id = Bukkit.getScheduler().scheduleSyncRepeatingTask(Main.getPlugin(), ()-> LocationRegistry.getLocations().stream().filter(l -> l.getBossInstance().isPresent()).forEach(boss ->
         {
-            if(!boss.getBossInstance().get().getEntity().isValid())
+            if(boss.getBossInstance().get().getEntity().isValid())
             {
                 boss.getBossInstance().get().getEntity().getWorld().spigot().playEffect(boss.getBossInstance().get().getEntity().getLocation(), boss.getBossInstance().get().getEffectType(), 0, 0, 0.5F, 1.3F, 0.5F, 1/5, 10, 35);
             }

@@ -14,7 +14,7 @@ public class PowerListener implements Listener {
 	@EventHandler
 	public void onNukeArrow(ProjectileHitEvent e)
 	{
-		if(e.getEntity() instanceof NukeArrowShooter)
+		if(e.getEntity().getShooter() instanceof NukeArrowShooter)
 		{
 			//Create a nuke on location
 			ExplosionUtil.nukeLocation(e.getEntity().getLocation());

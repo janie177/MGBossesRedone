@@ -10,6 +10,7 @@ import com.minegusta.mgbossesredone.api.powers.PowerCollection;
 import com.minegusta.mgbossesredone.api.tasks.SpawnTask;
 import com.minegusta.mgbossesredone.registry.LocationRegistry;
 import net.md_5.bungee.api.ChatColor;
+import org.bukkit.Bukkit;
 import org.bukkit.Effect;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.ExperienceOrb;

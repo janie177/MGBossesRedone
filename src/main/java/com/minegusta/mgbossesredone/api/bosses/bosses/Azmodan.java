@@ -47,7 +47,7 @@ public class Azmodan extends AbstractBoss {
 
 	@Override
 	public int getPowerChance() {
-		return 25;
+		return 20;
 	}
 
 	@Override
