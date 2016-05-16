@@ -74,6 +74,11 @@ public abstract class AbstractBoss
 
     public abstract int respawnTime();
 
+    public int getPassiveChance()
+    {
+        return 10;
+    }
+
     public abstract List<Power> getStartingPowers();
 
     public abstract Effect getEffectType();

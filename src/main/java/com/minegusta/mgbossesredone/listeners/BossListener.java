@@ -88,7 +88,7 @@ public class BossListener implements Listener
             List<LivingEntity> entities = Lists.newArrayList();
             e.getEntity().getWorld().getLivingEntities().stream().filter(ent -> ent.getLocation().distance(e.getEntity().getLocation()) < 30 && !ent.getUniqueId().toString().equals(e.getEntity().getUniqueId().toString())).forEach(entities::add);
             boss.get().onDamage(e, Optional.empty(), false);
-            if(RandomUtil.chance(boss.get().getPowerChance()))
+            if(RandomUtil.chance(boss.get().getPassiveChance()))
             {
                 boss.get().runRandomPower(IPower.PowerType.PASSIVE, entities);
             }

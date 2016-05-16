@@ -30,7 +30,7 @@ public class FieryExplosion implements IPower {
 			final int k = i;
 			Bukkit.getScheduler().scheduleSyncDelayedTask(Main.getPlugin(), ()->
 			{
-				boss.getWorld().spigot().playEffect(boss.getLocation(), Effect.MOBSPAWNER_FLAMES, 0, 0, k / 10, k/10, k/10, 1, k/2, 50);
+				boss.getWorld().spigot().playEffect(boss.getLocation(), Effect.MOBSPAWNER_FLAMES, 0, 0, k / 5, k/5, k/5, 1, k/2, 50);
 			},i * 2);
 
 			if(i == 49)
@@ -38,7 +38,7 @@ public class FieryExplosion implements IPower {
 				Bukkit.getScheduler().scheduleSyncDelayedTask(Main.getPlugin(), ()->
 				{
 					InvincibleUtil.setInvincible(boss, 3);
-					boss.getWorld().createExplosion(boss.getLocation().getX(), boss.getLocation().getY(), boss.getLocation().getZ(), 8, false, false);
+					boss.getWorld().createExplosion(boss.getLocation().getX(), boss.getLocation().getY(), boss.getLocation().getZ(), 10, false, false);
 				},i * 2);
 			}
 		}
