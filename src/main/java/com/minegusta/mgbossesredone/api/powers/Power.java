@@ -11,15 +11,24 @@ import com.minegusta.mgbossesredone.api.powers.powers.bossspecific.azmodan.ice.F
 import com.minegusta.mgbossesredone.api.powers.powers.bossspecific.azmodan.ice.IceMinions;
 import com.minegusta.mgbossesredone.api.powers.powers.bossspecific.azmodan.ice.TidalWave;
 import com.minegusta.mgbossesredone.api.powers.powers.bossspecific.azmodan.lastphase.*;
+import com.minegusta.mgbossesredone.api.powers.powers.bossspecific.ghastinator.FireArrow;
+import com.minegusta.mgbossesredone.api.powers.powers.bossspecific.ghastinator.Launch;
+import com.minegusta.mgbossesredone.api.powers.powers.bossspecific.ghastinator.Switch;
 import com.minegusta.mgbossesredone.api.powers.powers.bossspecific.hydra.Duplicate;
 import com.minegusta.mgbossesredone.api.powers.powers.bossspecific.hydra.ZombieTornado;
 import com.minegusta.mgbossesredone.api.powers.powers.bossspecific.jw.JWTaunt;
 import com.minegusta.mgbossesredone.api.powers.powers.bossspecific.jw.Oink;
 import com.minegusta.mgbossesredone.api.powers.powers.bossspecific.jw.ShootArrow;
+import com.minegusta.mgbossesredone.api.powers.powers.bossspecific.mausbaus.Cheesify;
+import com.minegusta.mgbossesredone.api.powers.powers.bossspecific.mausbaus.MausMinions;
+import com.minegusta.mgbossesredone.api.powers.powers.bossspecific.mausbaus.MausMinions2;
+import com.minegusta.mgbossesredone.api.powers.powers.bossspecific.mausbaus.MausTaunt;
 import com.minegusta.mgbossesredone.api.powers.powers.bossspecific.skeletor.ArrowRain;
 import com.minegusta.mgbossesredone.api.powers.powers.bossspecific.skeletor.ArrowSpray;
 import com.minegusta.mgbossesredone.api.powers.powers.bossspecific.skeletor.ExplodingBats;
 import com.minegusta.mgbossesredone.api.powers.powers.bossspecific.skeletor.Taunt;
+import com.minegusta.mgbossesredone.api.powers.powers.bossspecific.warg.Howl;
+import com.minegusta.mgbossesredone.api.powers.powers.bossspecific.warg.WolfMinions;
 import com.minegusta.mgbossesredone.api.powers.powers.bossspecific.zombieking.ExplodingPigmen;
 import com.minegusta.mgbossesredone.api.powers.powers.bossspecific.zombieking.Jump;
 import com.minegusta.mgbossesredone.api.powers.powers.bossspecific.zombieking.ZombieKingMinions;
@@ -54,6 +63,15 @@ public enum Power {
     EXPLODINGPIGMEN(new ExplodingPigmen()),
     JUMP(new Jump()),
     ZOMBIEKINGMINIONS(new ZombieKingMinions()),
+    FIREARROW(new FireArrow()),
+    LAUNCH(new Launch()),
+    SWITCH(new Switch()),
+    CHEESIFY(new Cheesify()),
+    MAUSMINIONS(new MausMinions()),
+    MAUSMINIONS2(new MausMinions2()),
+    MAUSTAUNT(new MausTaunt()),
+    HOWL(new Howl()),
+    WOLFMINIONS(new WolfMinions()),
     TAUNT(new Taunt());
 
     IPower power;

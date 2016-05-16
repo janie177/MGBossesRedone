@@ -23,6 +23,6 @@ public class AzmodanLoot extends Table {
 
 	@Override
 	public int getPromillage() {
-		return 70;
+		return 200;
 	}
 }

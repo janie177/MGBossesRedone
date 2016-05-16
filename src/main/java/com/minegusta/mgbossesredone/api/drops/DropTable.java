@@ -19,6 +19,9 @@ public enum DropTable {
     ZOMBIE_KING_SPECIAL(new ZombieKingLoot()),
     ARMOUR(new ArmourLoot()),
     TOOL(new ToolLoot()),
+    MAUS_BAUS_SPECIAL(new MausBausLoot()),
+    GHASTINATOR_SPECIAL(new GhastinatorLoot()),
+    WARG_SPECIAL(new WargLoot()),
     BUILDBLOCKS(new BuildBlockLoot()),
     BONES(new Bones());
 

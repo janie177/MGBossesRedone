@@ -80,7 +80,7 @@ public class Skeletor extends AbstractBoss {
 
     @Override
     public List<DropTable> getDropTables() {
-        return Lists.newArrayList(DropTable.BONES);
+        return Lists.newArrayList(DropTable.BONES, DropTable.SKELETOR_SPECIAL, DropTable.MEDIUM);
     }
 
     @Override

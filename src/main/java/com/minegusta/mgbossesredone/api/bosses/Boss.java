@@ -1,9 +1,6 @@
 package com.minegusta.mgbossesredone.api.bosses;
 
-import com.minegusta.mgbossesredone.api.bosses.bosses.Azmodan;
-import com.minegusta.mgbossesredone.api.bosses.bosses.Hydra;
-import com.minegusta.mgbossesredone.api.bosses.bosses.Skeletor;
-import com.minegusta.mgbossesredone.api.bosses.bosses.ZombieKing;
+import com.minegusta.mgbossesredone.api.bosses.bosses.*;
 import com.minegusta.mgbossesredone.api.locations.SpawnLocation;
 
 import java.util.Optional;
@@ -13,6 +10,9 @@ public enum Boss {
     AZMODAN(Azmodan.class),
     HYDRA(Hydra.class),
     ZOMBIEKING(ZombieKing.class),
+    GHASTINATOR(Ghastinator.class),
+    MAUSBAUS(MausBaus.class),
+    WARG(Warg.class),
     SKELETOR(Skeletor.class);
 
     private Class<? extends AbstractBoss> boss;
