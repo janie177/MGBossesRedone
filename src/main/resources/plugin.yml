@@ -2,6 +2,7 @@ name: MGBossesRedone
 version: ${project.version}
 author: janie177
 main: com.minegusta.mgbossesredone.main.Main
+softdepent: [Multiverse-Core]
 commands:
   boss:
     description: The administrative Boss command.
