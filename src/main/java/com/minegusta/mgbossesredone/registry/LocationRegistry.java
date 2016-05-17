@@ -14,7 +14,7 @@ public class LocationRegistry
     public static void add(String name, SpawnLocation spawn)
     {
         locations.put(name, spawn);
-        if(Bukkit.getWorld(spawn.getLocation().getWorld().toString()) != null && !spawn.getIfSpawned() && spawn.getLocation().getChunk().isLoaded())
+        if(!spawn.getIfSpawned() && spawn.getLocation().getChunk().isLoaded())
         {
             spawn.getBoss().spawnBoss(spawn);
         }

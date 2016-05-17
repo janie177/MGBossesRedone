@@ -6,6 +6,7 @@ import com.minegusta.mgbossesredone.registry.LocationRegistry;
 import com.minegusta.mgbossesredone.tasks.BossEffectTask;
 import com.minegusta.mgbossesredone.tasks.SpecialPowerTask;
 import com.minegusta.mgbossesredone.tasks.StageTask;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.plugin.Plugin;
@@ -29,7 +30,7 @@ public class Main extends JavaPlugin {
         }
 
         //Config
-        ConfigManager.loadLocationsConfig();
+        Bukkit.getScheduler().scheduleSyncDelayedTask(this, ConfigManager::loadLocationsConfig, 300);
 
         //Tasks
         BossEffectTask.start();
