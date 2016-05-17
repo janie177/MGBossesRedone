@@ -50,10 +50,11 @@ public class BossListener implements Listener
         }
         else if(e.getDamager() instanceof Arrow && ((Arrow) e.getDamager()).getShooter() instanceof LivingEntity)
         {
-            if(e.getDamager().getLocation().distance(e.getEntity().getLocation()) > 30)
+            if(((LivingEntity)((Arrow) e.getDamager()).getShooter()).getLocation().distance(e.getEntity().getLocation()) > 30)
             {
                 e.setCancelled(true);
-                e.getDamager().sendMessage(ChatColor.RED + "You are too far away to damage that boss!");
+                ((LivingEntity)((Arrow) e.getDamager()).getShooter()).sendMessage(ChatColor.RED + "You are too far away to damage that boss!");
+                return;
             }
             boss.get().onDamage(e, Optional.of((LivingEntity) ((Arrow) e.getDamager()).getShooter()), true);
             if(RandomUtil.chance(boss.get().getPowerChance()))
