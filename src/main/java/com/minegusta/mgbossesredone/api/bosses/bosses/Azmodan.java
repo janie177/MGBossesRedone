@@ -22,12 +22,12 @@ public class Azmodan extends AbstractBoss {
 
 	@Override
 	public int getSpecialAttackRadius() {
-		return 25;
+		return 32;
 	}
 
 	@Override
 	public int getSpecialAttackInterval() {
-		return 12;
+		return 10;
 	}
 
 	@Override
@@ -47,7 +47,7 @@ public class Azmodan extends AbstractBoss {
 
 	@Override
 	public int getPowerChance() {
-		return 20;
+		return 35;
 	}
 
 	@Override
@@ -75,12 +75,18 @@ public class Azmodan extends AbstractBoss {
 
 	@Override
 	public double getMaxHealth() {
-		return 650;
+		return 1000;
 	}
 
 	@Override
 	public void onSpawn() {
 		updateStage();
+	}
+
+	@Override
+	public int getPassiveChance()
+	{
+		return 50;
 	}
 
 	@Override
@@ -110,7 +116,7 @@ public class Azmodan extends AbstractBoss {
 
 	private void updateStage()
 	{
-		if(getEntity().getHealth() < 100)
+		if(getEntity().getHealth() < 200)
 		{
 			//Make final stage
 			if(stage != Stage.FINAL)

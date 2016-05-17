@@ -26,10 +26,11 @@ public class BlazeStorm implements IPower {
 	@Override
 	public void run(LivingEntity boss, List<LivingEntity> target) {
 		if(!EntityUtil.canSpawnLivingEntity(boss.getLocation(), 40, 25)) return;
-		for(int i = 0; i < 3; i++)
+		for(int i = 0; i < 4; i++)
 		{
 			Blaze b = (Blaze) boss.getWorld().spawnEntity(boss.getLocation(), EntityType.BLAZE);
 			b.setCustomName(ChatColor.DARK_RED + "Azmodan's Minion");
+			b.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 600 * 20, 0));
 			b.setCustomNameVisible(true);
 		}
 	}

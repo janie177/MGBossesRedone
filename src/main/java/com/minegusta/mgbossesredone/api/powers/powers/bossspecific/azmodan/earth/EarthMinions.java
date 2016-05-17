@@ -31,7 +31,7 @@ public class EarthMinions implements IPower {
 		if(!EntityUtil.canSpawnLivingEntity(boss.getLocation(), 40, 25)) return;
 
 		LivingEntity ent = target.get(0);
-		for(int i = 0; i < 2; i++)
+		for(int i = 0; i < 3; i++)
 		{
 			Cow c = (Cow) boss.getWorld().spawnEntity(ent.getLocation(), EntityType.COW);
 			c.setCustomName(ChatColor.GOLD + "Exploding Cow");
