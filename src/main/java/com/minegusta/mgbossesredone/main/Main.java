@@ -30,7 +30,25 @@ public class Main extends JavaPlugin {
         }
 
         //Config
-        Bukkit.getScheduler().scheduleSyncDelayedTask(this, ConfigManager::loadLocationsConfig, 300);
+        Bukkit.getScheduler().scheduleSyncDelayedTask(this, ()-> {
+            ConfigManager.loadLocationsConfig();
+            for(SpawnLocation l : LocationRegistry.getLocations())
+            {
+                for(Entity f : l.getLocation().getChunk().getEntities())
+                {
+                    if(f instanceof LivingEntity)
+                    {
+                        LivingEntity le = (LivingEntity) f;
+                        Optional<String> name = l.getBoss().getName();
+                        if(name.isPresent() && le.getCustomName() != null && le.getCustomName().equalsIgnoreCase(name.get()) && !BossesPlugin.isBoss(le.getUniqueId().toString()))
+                        {
+                            le.remove();
+                        }
+                    }
+                }
+            }
+
+        }, 200);
 
         //Tasks
         BossEffectTask.start();
@@ -42,23 +60,6 @@ public class Main extends JavaPlugin {
         {
             getCommand(c.getCommand()).setExecutor(c.getExecutor());
         }
-
-        for(SpawnLocation l : LocationRegistry.getLocations())
-        {
-            for(Entity f : l.getLocation().getChunk().getEntities())
-            {
-                if(f instanceof LivingEntity)
-                {
-                    LivingEntity le = (LivingEntity) f;
-                    Optional<String> name = l.getBoss().getName();
-                    if(name.isPresent() && le.getCustomName() != null && le.getCustomName().equalsIgnoreCase(name.get()) && !BossesPlugin.isBoss(le.getUniqueId().toString()))
-                    {
-                        le.remove();
-                    }
-                }
-            }
-        }
-
 
     }
 

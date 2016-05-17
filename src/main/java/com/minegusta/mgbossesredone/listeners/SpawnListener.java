@@ -18,12 +18,11 @@ public class SpawnListener implements Listener
         for(SpawnLocation l : LocationRegistry.getLocations())
         {
             if(l.getIfSpawned()) continue;
-            if(Bukkit.getWorld(l.getLocation().getWorld().toString()) == null) continue;
             Chunk chunk = l.getLocation().getChunk();
             Chunk eventChunk = e.getChunk();
             if(chunk.getX() == eventChunk.getX() && chunk.getZ() == eventChunk.getZ())
             {
-                l.getBoss().spawnBoss(l);
+                Bukkit.getScheduler().scheduleSyncDelayedTask(Main.getPlugin(), ()-> l.getBoss().spawnBoss(l), 40);
             }
         }
     }
