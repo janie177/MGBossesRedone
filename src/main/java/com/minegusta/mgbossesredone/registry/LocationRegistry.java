@@ -2,6 +2,7 @@ package com.minegusta.mgbossesredone.registry;
 
 import com.google.common.collect.Maps;
 import com.minegusta.mgbossesredone.api.locations.SpawnLocation;
+import org.bukkit.Bukkit;
 
 import java.util.Collection;
 import java.util.concurrent.ConcurrentMap;
@@ -13,7 +14,7 @@ public class LocationRegistry
     public static void add(String name, SpawnLocation spawn)
     {
         locations.put(name, spawn);
-        if(!spawn.getIfSpawned() && spawn.getLocation().getChunk().isLoaded())
+        if(Bukkit.getWorld(spawn.getLocation().getWorld().toString()) != null && !spawn.getIfSpawned() && spawn.getLocation().getChunk().isLoaded())
         {
             spawn.getBoss().spawnBoss(spawn);
         }
