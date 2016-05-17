@@ -86,7 +86,6 @@ public class BossCommand implements CommandExecutor {
                 {
                     p.sendMessage(ChatColor.GRAY + " - " + ChatColor.LIGHT_PURPLE + boss.name());
                 }
-                ignored.printStackTrace();
                 return true;
             }
 
