@@ -67,7 +67,7 @@ public class Ghastinator extends AbstractBoss {
 
 	@Override
 	public double getMaxHealth() {
-		return 140;
+		return 160;
 	}
 
 	@Override

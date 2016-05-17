@@ -68,7 +68,7 @@ public class Hydra extends AbstractBoss {
 
 	@Override
 	public double getMaxHealth() {
-		return 80;
+		return 150;
 	}
 
 	@Override

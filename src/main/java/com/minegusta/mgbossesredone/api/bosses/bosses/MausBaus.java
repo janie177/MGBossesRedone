@@ -71,7 +71,7 @@ public class MausBaus extends AbstractBoss {
 
 	@Override
 	public double getMaxHealth() {
-		return 120;
+		return 160;
 	}
 
 	@Override

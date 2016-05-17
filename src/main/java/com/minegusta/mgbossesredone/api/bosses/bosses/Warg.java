@@ -58,7 +58,7 @@ public class Warg extends AbstractBoss {
 
 	@Override
 	public List<Power> getStartingPowers() {
-		return Lists.newArrayList(Power.PULL, Power.HOWL, Power.WOLFMINIONS);
+		return Lists.newArrayList(Power.PULL, Power.HOWL, Power.WOLFMINIONS, Power.SWITCH);
 	}
 
 	@Override
@@ -68,7 +68,7 @@ public class Warg extends AbstractBoss {
 
 	@Override
 	public double getMaxHealth() {
-		return 120;
+		return 160;
 	}
 
 	@Override

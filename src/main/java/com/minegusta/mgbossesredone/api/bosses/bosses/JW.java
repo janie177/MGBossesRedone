@@ -67,7 +67,7 @@ public class JW extends AbstractBoss {
 
 	@Override
 	public double getMaxHealth() {
-		return 100;
+		return 120;
 	}
 
 	@Override

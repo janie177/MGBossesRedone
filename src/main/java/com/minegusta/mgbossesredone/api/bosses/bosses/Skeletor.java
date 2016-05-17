@@ -69,7 +69,7 @@ public class Skeletor extends AbstractBoss {
 
     @Override
     public double getMaxHealth() {
-        return 90;
+        return 100;
     }
 
     @Override
