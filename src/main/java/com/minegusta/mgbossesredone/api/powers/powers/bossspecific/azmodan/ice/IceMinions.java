@@ -1,6 +1,7 @@
 package com.minegusta.mgbossesredone.api.powers.powers.bossspecific.azmodan.ice;
 
 import com.minegusta.mgbossesredone.api.powers.IPower;
+import com.minegusta.mgbossesredone.api.util.EntityUtil;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
@@ -24,6 +25,7 @@ public class IceMinions implements IPower {
 
 	@Override
 	public void run(LivingEntity boss, List<LivingEntity> target) {
+		if(!EntityUtil.canSpawnLivingEntity(boss.getLocation(), 40, 25)) return;
 		for(int i = 0; i < 3; i++)
 		{
 			Skeleton z = (Skeleton) boss.getWorld().spawnEntity(boss.getLocation(), EntityType.SKELETON);

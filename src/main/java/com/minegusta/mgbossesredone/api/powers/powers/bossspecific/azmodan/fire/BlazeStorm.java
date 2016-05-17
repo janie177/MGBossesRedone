@@ -1,6 +1,7 @@
 package com.minegusta.mgbossesredone.api.powers.powers.bossspecific.azmodan.fire;
 
 import com.minegusta.mgbossesredone.api.powers.IPower;
+import com.minegusta.mgbossesredone.api.util.EntityUtil;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Blaze;
 import org.bukkit.entity.EntityType;
@@ -24,6 +25,7 @@ public class BlazeStorm implements IPower {
 
 	@Override
 	public void run(LivingEntity boss, List<LivingEntity> target) {
+		if(!EntityUtil.canSpawnLivingEntity(boss.getLocation(), 40, 25)) return;
 		for(int i = 0; i < 3; i++)
 		{
 			Blaze b = (Blaze) boss.getWorld().spawnEntity(boss.getLocation(), EntityType.BLAZE);

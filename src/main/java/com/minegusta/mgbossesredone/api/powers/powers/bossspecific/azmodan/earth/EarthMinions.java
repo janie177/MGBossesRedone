@@ -1,6 +1,7 @@
 package com.minegusta.mgbossesredone.api.powers.powers.bossspecific.azmodan.earth;
 
 import com.minegusta.mgbossesredone.api.powers.IPower;
+import com.minegusta.mgbossesredone.api.util.EntityUtil;
 import com.minegusta.mgbossesredone.main.Main;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -27,6 +28,7 @@ public class EarthMinions implements IPower {
 	@Override
 	public void run(LivingEntity boss, List<LivingEntity> target) {
 		if(target.isEmpty())return;
+		if(!EntityUtil.canSpawnLivingEntity(boss.getLocation(), 40, 25)) return;
 
 		LivingEntity ent = target.get(0);
 		for(int i = 0; i < 2; i++)
