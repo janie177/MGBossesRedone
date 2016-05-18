@@ -52,7 +52,7 @@ public class Azmodan extends AbstractBoss {
 
 	@Override
 	public int respawnTime() {
-		return 0;
+		return 60;
 	}
 
 	@Override

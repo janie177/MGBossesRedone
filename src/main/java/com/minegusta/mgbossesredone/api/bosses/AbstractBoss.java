@@ -13,6 +13,7 @@ import com.minegusta.mgbossesredone.registry.LocationRegistry;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Bukkit;
 import org.bukkit.Effect;
+import org.bukkit.Location;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.ExperienceOrb;
 import org.bukkit.entity.LivingEntity;
@@ -124,7 +125,12 @@ public abstract class AbstractBoss
         {
             if(table.rolledPositive())
             {
-                entity.getWorld().dropItemNaturally(entity.getLocation(), table.getRandomItem());
+                final Location dropSpot = entity.getLocation();
+                Bukkit.getScheduler().scheduleSyncDelayedTask(Main.getPlugin(), ()->
+                {
+                    dropSpot.getWorld().dropItemNaturally(dropSpot, table.getRandomItem());
+                    dropSpot.getWorld().spigot().playEffect(dropSpot, Effect.CLOUD, 0, 0, 1, 1, 1, 1, 15, 30);
+                }, 40);
             }
         });
 
