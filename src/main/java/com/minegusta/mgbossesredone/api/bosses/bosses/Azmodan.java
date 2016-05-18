@@ -105,6 +105,16 @@ public class Azmodan extends AbstractBoss {
 	}
 
 	@Override
+	public int getCredits() {
+		return 30;
+	}
+
+	@Override
+	public void extraOnDeath() {
+
+	}
+
+	@Override
 	public void onDamage(EntityDamageEvent e, Optional<LivingEntity> attacker, boolean arrow) {
 
 	}

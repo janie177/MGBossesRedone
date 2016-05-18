@@ -107,6 +107,16 @@ public class MausBaus extends AbstractBoss {
 	}
 
 	@Override
+	public int getCredits() {
+		return 2;
+	}
+
+	@Override
+	public void extraOnDeath() {
+
+	}
+
+	@Override
 	public void onDamage(EntityDamageEvent e, Optional<LivingEntity> attacker, boolean arrow) {
 
 	}

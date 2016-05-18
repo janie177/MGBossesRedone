@@ -32,7 +32,6 @@ public class Freeze implements IPower {
 		List<Location> locations = Lists.newArrayList();
 		LivingEntity t = target.get(0);
 		if(!(t instanceof Player)) return;
-		Player p = (Player) t;
 		final Block center = t.getLocation().getBlock();
 		for(int x2 = -7; x2 < 8; x2++)
 		{
@@ -47,7 +46,7 @@ public class Freeze implements IPower {
 		center.getWorld().getPlayers().stream().filter(pl -> pl.getLocation().distance(center.getLocation()) < 70).forEach(pl ->
 		{
 			if(pl.getLocation().distance(t.getLocation()) < 15) pl.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 20 * 6, 1));
-			locations.stream().forEach(loc ->pl.sendBlockChange(loc, Material.SNOW.getId(), (byte) 0));
+			locations.stream().forEach(loc ->pl.sendBlockChange(loc, Material.SNOW.getId(), (byte) 1));
 		});
 
 		Bukkit.getScheduler().scheduleSyncDelayedTask(Main.getPlugin(), ()->

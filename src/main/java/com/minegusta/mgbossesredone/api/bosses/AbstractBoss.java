@@ -8,6 +8,7 @@ import com.minegusta.mgbossesredone.api.powers.IPower;
 import com.minegusta.mgbossesredone.api.powers.Power;
 import com.minegusta.mgbossesredone.api.powers.PowerCollection;
 import com.minegusta.mgbossesredone.api.tasks.SpawnTask;
+import com.minegusta.mgbossesredone.main.Main;
 import com.minegusta.mgbossesredone.registry.LocationRegistry;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Bukkit;
@@ -113,6 +114,10 @@ public abstract class AbstractBoss
         this.stage = stage;
     }
 
+    public abstract int getCredits();
+
+    public abstract void extraOnDeath();
+
     private void dropLoot()
     {
         tables.stream().forEach(table ->
@@ -121,6 +126,12 @@ public abstract class AbstractBoss
             {
                 entity.getWorld().dropItemNaturally(entity.getLocation(), table.getRandomItem());
             }
+        });
+
+        entity.getWorld().getPlayers().stream().filter(p -> p.getLocation().distance(entity.getLocation()) <= 30).forEach(p ->
+        {
+            p.sendMessage(ChatColor.DARK_PURPLE + "[" + org.bukkit.ChatColor.LIGHT_PURPLE + "MG" + org.bukkit.ChatColor.DARK_PURPLE + "] " + org.bukkit.ChatColor.YELLOW + "The boss dropped " + org.bukkit.ChatColor.LIGHT_PURPLE + getCredits() + org.bukkit.ChatColor.YELLOW + " credits.");
+            Bukkit.getServer().dispatchCommand(Main.getPlugin().getServer().getConsoleSender(), "addcredits " + p.getName() + " " + getCredits());
         });
     }
 
@@ -155,6 +166,7 @@ public abstract class AbstractBoss
         {
             ((ExperienceOrb)entity.getWorld().spawnEntity(entity.getLocation(), EntityType.EXPERIENCE_ORB)).setExperience(getExp());
             dropLoot();
+            extraOnDeath();
         }
         getSpawnLocation().setIfSpawned(false);
         if(respawn) getSpawnLocation().setTaskId(new SpawnTask(respawnTime(), getBossType(), getSpawnLocation()).startTimer());

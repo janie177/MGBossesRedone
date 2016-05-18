@@ -91,6 +91,16 @@ public class ZombieKing extends AbstractBoss {
 	}
 
 	@Override
+	public int getCredits() {
+		return 4;
+	}
+
+	@Override
+	public void extraOnDeath() {
+
+	}
+
+	@Override
 	public void onDamage(EntityDamageEvent e, Optional<LivingEntity> attacker, boolean arrow) {
 
 	}

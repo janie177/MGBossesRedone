@@ -94,6 +94,16 @@ public class Skeletor extends AbstractBoss {
     }
 
     @Override
+    public int getCredits() {
+        return 3;
+    }
+
+    @Override
+    public void extraOnDeath() {
+
+    }
+
+    @Override
     public void onDamage(EntityDamageEvent e, Optional<LivingEntity> attacker, boolean arrow) {
 
     }
