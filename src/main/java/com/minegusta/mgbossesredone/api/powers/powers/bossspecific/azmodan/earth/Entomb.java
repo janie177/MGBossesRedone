@@ -53,7 +53,7 @@ public class Entomb implements IPower {
 		Bukkit.getScheduler().scheduleSyncDelayedTask(Main.getPlugin(), ()->
 		{
 			blocks.stream().forEach(b -> {
-				if(b.getType() == Material.STONE) sendBlockChange(b, Material.AIR);
+				sendBlockChange(b, Material.AIR);
 			});
 		}, 20 * 4);
 	}
