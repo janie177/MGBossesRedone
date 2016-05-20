@@ -73,19 +73,16 @@ public class Quake implements IPower {
 			final int up = i;
 			Bukkit.getScheduler().scheduleSyncDelayedTask(Main.getPlugin(), () -> {
 				Block changed = b.getRelative(BlockFace.UP, up);
-				if (changed.getType() == Material.AIR) {
-					changed.setType(Material.STONE);
-					removeBlock(changed, duration - up * 20);
-				}
+				sendBlockChange(changed, Material.STONE);
+				removeBlock(changed, duration - up * 20);
+
 			}, i * delay);
 		}
 	}
 
 	private void removeBlock(final Block b, int delay) {
 		Bukkit.getScheduler().scheduleSyncDelayedTask(Main.getPlugin(), () -> {
-			if (b.getType() == Material.STONE) {
-				b.setType(Material.AIR);
-			}
+			sendBlockChange(b, Material.AIR);
 		}, delay);
 	}
 
@@ -99,6 +96,14 @@ public class Quake implements IPower {
 			}
 		}
 		return l.getBlock().getRelative(BlockFace.DOWN, 3);
+	}
+
+	private void sendBlockChange(Block block, Material to)
+	{
+		block.getWorld().getPlayers().stream().filter(p -> p.getLocation().distance(block.getLocation()) < 50).forEach(p ->
+		{
+			p.sendBlockChange(block.getLocation(), to, (byte) 0);
+		});
 	}
 
 }

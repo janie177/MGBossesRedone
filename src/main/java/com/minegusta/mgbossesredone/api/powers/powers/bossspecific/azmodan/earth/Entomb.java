@@ -41,7 +41,7 @@ public class Entomb implements IPower {
 						Location l = center.getBlock().getRelative(x2, y2, z2).getLocation();
 						if(l.getBlock().getType() == Material.AIR && l.distance(center) > 2 && l.distance(center) < 5)
 						{
-							l.getBlock().setType(Material.STONE);
+							sendBlockChange(l.getBlock(), Material.STONE);
 							blocks.add(l.getBlock());
 						}
 
@@ -53,8 +53,17 @@ public class Entomb implements IPower {
 		Bukkit.getScheduler().scheduleSyncDelayedTask(Main.getPlugin(), ()->
 		{
 			blocks.stream().forEach(b -> {
-				if(b.getType() == Material.STONE) b.setType(Material.AIR);
+				if(b.getType() == Material.STONE) sendBlockChange(b, Material.AIR);
 			});
 		}, 20 * 4);
+	}
+
+
+	private void sendBlockChange(Block block, Material to)
+	{
+		block.getWorld().getPlayers().stream().filter(p -> p.getLocation().distance(block.getLocation()) < 50).forEach(p ->
+		{
+			p.sendBlockChange(block.getLocation(), to, (byte) 0);
+		});
 	}
 }

@@ -14,6 +14,9 @@ import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Bukkit;
 import org.bukkit.Effect;
 import org.bukkit.Location;
+import org.bukkit.Material;
+import org.bukkit.block.Block;
+import org.bukkit.block.Chest;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.ExperienceOrb;
 import org.bukkit.entity.LivingEntity;
@@ -123,20 +126,27 @@ public abstract class AbstractBoss
     {
         tables.stream().forEach(table ->
         {
+            Block spawnBlock = getSpawnLocation().getLocation().getBlock();
+            spawnBlock.setType(Material.CHEST);
+            Chest chest = (Chest) spawnBlock.getState();
+
             if(table.rolledPositive())
             {
-                final Location dropSpot = entity.getLocation();
-                Bukkit.getScheduler().scheduleSyncDelayedTask(Main.getPlugin(), ()->
+                if (chest.getInventory().firstEmpty() == -1) {
+                    entity.getWorld().dropItemNaturally(entity.getLocation(), table.getRandomItem());
+                    entity.getWorld().spigot().playEffect(entity.getLocation(), Effect.CLOUD, 0, 0, 1, 1, 1, 1, 15, 30);
+                } else
                 {
-                    dropSpot.getWorld().dropItemNaturally(dropSpot, table.getRandomItem());
-                    dropSpot.getWorld().spigot().playEffect(dropSpot, Effect.CLOUD, 0, 0, 1, 1, 1, 1, 15, 30);
-                }, 40);
+                    chest.getInventory().addItem(table.getRandomItem());
+                    chest.getWorld().spigot().playEffect(chest.getLocation(), Effect.CLOUD, 0, 0, 1, 1, 1, 1, 15, 40);
+                }
             }
         });
 
         entity.getWorld().getPlayers().stream().filter(p -> p.getLocation().distance(entity.getLocation()) <= 30).forEach(p ->
         {
             p.sendMessage(ChatColor.DARK_PURPLE + "[" + org.bukkit.ChatColor.LIGHT_PURPLE + "MG" + org.bukkit.ChatColor.DARK_PURPLE + "] " + org.bukkit.ChatColor.YELLOW + "The boss dropped " + org.bukkit.ChatColor.LIGHT_PURPLE + getCredits() + org.bukkit.ChatColor.YELLOW + " credits.");
+            p.sendMessage(ChatColor.DARK_PURPLE + "[" + org.bukkit.ChatColor.LIGHT_PURPLE + "MG" + org.bukkit.ChatColor.DARK_PURPLE + "] " + org.bukkit.ChatColor.YELLOW + "The boss loot has been placed in the chest at the spawn location.");
             Bukkit.getServer().dispatchCommand(Main.getPlugin().getServer().getConsoleSender(), "addcredits " + p.getName() + " " + getCredits());
         });
     }
