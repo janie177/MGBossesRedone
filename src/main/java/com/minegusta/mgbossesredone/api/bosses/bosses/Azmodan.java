@@ -86,7 +86,7 @@ public class Azmodan extends AbstractBoss {
 	@Override
 	public int getPassiveChance()
 	{
-		return 50;
+		return 15;
 	}
 
 	@Override

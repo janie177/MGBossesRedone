@@ -84,7 +84,7 @@ public class BossListener implements Listener
         Optional<AbstractBoss> boss = BossesPlugin.getBossFromUuid(uuid);
         if(!boss.isPresent()) return;
         boss.get().checkDeath(e);
-        if(e.getCause() != EntityDamageEvent.DamageCause.ENTITY_ATTACK && e.getCause() != EntityDamageEvent.DamageCause.PROJECTILE && e.getCause() != EntityDamageEvent.DamageCause.MAGIC)
+        if(e.getCause() != EntityDamageEvent.DamageCause.ENTITY_ATTACK && e.getCause() != EntityDamageEvent.DamageCause.PROJECTILE && e.getCause() != EntityDamageEvent.DamageCause.MAGIC && e.getCause() != EntityDamageEvent.DamageCause.SUFFOCATION)
         {
             List<LivingEntity> entities = Lists.newArrayList();
             e.getEntity().getWorld().getLivingEntities().stream().filter(ent -> ent.getLocation().distance(e.getEntity().getLocation()) < 30 && !ent.getUniqueId().toString().equals(e.getEntity().getUniqueId().toString())).forEach(entities::add);
