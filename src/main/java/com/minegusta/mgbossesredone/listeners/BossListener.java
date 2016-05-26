@@ -81,20 +81,14 @@ public class BossListener implements Listener
     {
         String uuid = e.getEntity().getUniqueId().toString();
 
+        if(e instanceof EntityDamageByBlockEvent)
+        {
+            return;
+        }
+
         Optional<AbstractBoss> boss = BossesPlugin.getBossFromUuid(uuid);
         if(!boss.isPresent()) return;
         boss.get().checkDeath(e);
-
-        if(e.getCause() == EntityDamageEvent.DamageCause.SUFFOCATION)
-        {
-            if(BossesPlugin.isBoss(e.getEntity().getUniqueId().toString()))
-            {
-                boss.get().getEntity().teleport(boss.get().getEntity().getLocation().clone().add(0,1.3,0));
-                e.setCancelled(true);
-                return;
-            }
-        }
-
         if(e.getCause() != EntityDamageEvent.DamageCause.ENTITY_ATTACK && e.getCause() != EntityDamageEvent.DamageCause.PROJECTILE && e.getCause() != EntityDamageEvent.DamageCause.MAGIC)
         {
             List<LivingEntity> entities = Lists.newArrayList();

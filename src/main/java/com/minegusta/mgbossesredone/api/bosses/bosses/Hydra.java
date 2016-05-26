@@ -53,7 +53,7 @@ public class Hydra extends AbstractBoss {
 
 	@Override
 	public int respawnTime() {
-		return 3;
+		return 30;
 	}
 
 	@Override
