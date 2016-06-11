@@ -52,7 +52,7 @@ public class ZombieKing extends AbstractBoss {
 
 	@Override
 	public int respawnTime() {
-		return 50;
+		return 30;
 	}
 
 	@Override
