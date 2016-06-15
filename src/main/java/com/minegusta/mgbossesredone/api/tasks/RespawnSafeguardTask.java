@@ -13,7 +13,7 @@ public class RespawnSafeguardTask {
 		id = Bukkit.getScheduler().scheduleSyncRepeatingTask(Main.getPlugin(), () ->
 		{
 			LocationRegistry.getLocations().stream()
-					.filter(l -> !l.getIfSpawned() && l.getTaskId() == -1 && !l.getBossInstance().isPresent())
+					.filter(l -> !l.getIfSpawned() && l.getTaskId() == -1 && !l.getBossInstance().isPresent() && l.getLocation().getChunk().isLoaded())
 					.forEach(l -> l.getBoss().spawnBoss(l));
 		}, 20 * 30, 20 * 30);
 	}
