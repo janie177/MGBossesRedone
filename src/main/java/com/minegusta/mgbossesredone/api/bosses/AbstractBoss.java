@@ -212,6 +212,7 @@ public abstract class AbstractBoss
         this.tables = getDropTables();
 
         LocationRegistry.getSpawnLocation(l.getName()).setIfSpawned(true);
+        l.setTaskId(-1);
 
         entity.getWorld().getLivingEntities().stream().filter(ent -> entity.getCustomName().equalsIgnoreCase(ent.getCustomName()) && ent.isValid() && ent.getLocation().distance(entity.getLocation()) < 100 && !ent.getUniqueId().toString().equalsIgnoreCase(entity.getUniqueId().toString()) && !BossesPlugin.isBoss(ent.getUniqueId().toString())).forEach(ent ->
         {

@@ -2,6 +2,7 @@ package com.minegusta.mgbossesredone.main;
 
 import com.minegusta.mgbossesredone.api.BossesPlugin;
 import com.minegusta.mgbossesredone.api.locations.SpawnLocation;
+import com.minegusta.mgbossesredone.api.tasks.RespawnSafeguardTask;
 import com.minegusta.mgbossesredone.registry.LocationRegistry;
 import com.minegusta.mgbossesredone.tasks.BossEffectTask;
 import com.minegusta.mgbossesredone.tasks.SpecialPowerTask;
@@ -54,6 +55,7 @@ public class Main extends JavaPlugin {
         BossEffectTask.start();
         StageTask.start();
         SpecialPowerTask.start();
+        RespawnSafeguardTask.start();
 
         //Commands
         for(Commands c : Commands.values())
@@ -75,6 +77,7 @@ public class Main extends JavaPlugin {
         SpecialPowerTask.stop();
         BossEffectTask.stop();
         StageTask.stop();
+        RespawnSafeguardTask.stop();
     }
 
     public static Plugin getPlugin()
