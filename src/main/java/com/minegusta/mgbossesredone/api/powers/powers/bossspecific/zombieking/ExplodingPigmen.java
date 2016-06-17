@@ -2,6 +2,7 @@ package com.minegusta.mgbossesredone.api.powers.powers.bossspecific.zombieking;
 
 import com.google.common.collect.Lists;
 import com.minegusta.mgbossesredone.api.powers.IPower;
+import com.minegusta.mgbossesredone.api.util.InvincibleUtil;
 import com.minegusta.mgbossesredone.main.Main;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -41,6 +42,7 @@ public class ExplodingPigmen implements IPower {
 
 		Bukkit.getScheduler().scheduleSyncDelayedTask(Main.getPlugin(), ()-> pigZombies.stream().filter(LivingEntity::isValid).forEach(pz ->
 		{
+			InvincibleUtil.setInvincible(boss, 1);
 			pz.getWorld().createExplosion(pz.getLocation().getX(), pz.getLocation().getY(), pz.getLocation().getZ(), 4, false, false);
 			pz.getWorld().getLivingEntities().stream().filter(le -> le.getLocation().distance(pz.getLocation()) < 4).forEach(ent ->
 			{
