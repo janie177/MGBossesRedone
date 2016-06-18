@@ -86,6 +86,12 @@ public class BossListener implements Listener
             return;
         }
 
+        if((e.getCause() == EntityDamageEvent.DamageCause.FALL || e.getCause() == EntityDamageEvent.DamageCause.BLOCK_EXPLOSION || e.getCause() == EntityDamageEvent.DamageCause.ENTITY_EXPLOSION) && BossesPlugin.isBoss(e.getEntity().getUniqueId().toString()))
+        {
+            e.setCancelled(true);
+            return;
+        }
+
         Optional<AbstractBoss> boss = BossesPlugin.getBossFromUuid(uuid);
         if(!boss.isPresent()) return;
         boss.get().checkDeath(e);
