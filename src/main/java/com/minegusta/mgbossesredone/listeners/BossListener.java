@@ -43,7 +43,7 @@ public class BossListener implements Listener
         if(e.getDamager() instanceof LivingEntity)
         {
             boss.get().onDamage(e, Optional.of((LivingEntity) e.getDamager()), false);
-            if(RandomUtil.chance(boss.get().getPowerChance()))
+            if(RandomUtil.chance(boss.get().getPowerChance()) && boss.get().getEntity().getLocation().getChunk().isLoaded())
             {
                 boss.get().runRandomPower(IPower.PowerType.ACTIVE, Lists.newArrayList((LivingEntity) e.getDamager()));
             }
@@ -57,7 +57,7 @@ public class BossListener implements Listener
                 return;
             }
             boss.get().onDamage(e, Optional.of((LivingEntity) ((Arrow) e.getDamager()).getShooter()), true);
-            if(RandomUtil.chance(boss.get().getPowerChance()))
+            if(RandomUtil.chance(boss.get().getPowerChance()) && boss.get().getEntity().getLocation().getChunk().isLoaded())
             {
                 boss.get().runRandomPower(IPower.PowerType.ACTIVE, Lists.newArrayList(((LivingEntity) ((Arrow) e.getDamager()).getShooter())));
             }
@@ -67,7 +67,7 @@ public class BossListener implements Listener
             if(e.getDamager() instanceof ThrownPotion)
             {
                 ThrownPotion p = (ThrownPotion) e.getDamager();
-                if(p.getShooter() instanceof LivingEntity && RandomUtil.chance(boss.get().getPowerChance()))
+                if(p.getShooter() instanceof LivingEntity && RandomUtil.chance(boss.get().getPowerChance()) && boss.get().getEntity().getLocation().getChunk().isLoaded())
                 {
                     boss.get().runRandomPower(IPower.PowerType.ACTIVE, Lists.newArrayList((LivingEntity)((ThrownPotion) e.getDamager()).getShooter()));
                 }
@@ -100,7 +100,7 @@ public class BossListener implements Listener
             List<LivingEntity> entities = Lists.newArrayList();
             e.getEntity().getWorld().getLivingEntities().stream().filter(ent -> ent.getLocation().distance(e.getEntity().getLocation()) < 30 && !ent.getUniqueId().toString().equals(e.getEntity().getUniqueId().toString())).forEach(entities::add);
             boss.get().onDamage(e, Optional.empty(), false);
-            if(RandomUtil.chance(boss.get().getPassiveChance()))
+            if(RandomUtil.chance(boss.get().getPassiveChance()) && boss.get().getEntity().getLocation().getChunk().isLoaded())
             {
                 boss.get().runRandomPower(IPower.PowerType.PASSIVE, entities);
             }

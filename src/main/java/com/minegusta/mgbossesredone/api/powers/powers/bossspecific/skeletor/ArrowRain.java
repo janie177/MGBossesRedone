@@ -34,7 +34,7 @@ public class ArrowRain implements IPower {
 
                         @Override
                         public void run() {
-                            if(ent.isValid() && ent.getWorld().equals(world)) world.spawnEntity(ent.getLocation().clone().add(0, 12, 0), EntityType.ARROW);
+                            if(ent.isValid() && ent.getWorld().equals(world) && ent.getLocation().getChunk().isLoaded()) world.spawnEntity(ent.getLocation().clone().add(0, 12, 0), EntityType.ARROW);
                         }
                     }, i);
                 }

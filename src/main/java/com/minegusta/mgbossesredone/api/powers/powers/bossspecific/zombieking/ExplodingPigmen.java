@@ -2,6 +2,7 @@ package com.minegusta.mgbossesredone.api.powers.powers.bossspecific.zombieking;
 
 import com.google.common.collect.Lists;
 import com.minegusta.mgbossesredone.api.powers.IPower;
+import com.minegusta.mgbossesredone.api.util.EntityUtil;
 import com.minegusta.mgbossesredone.api.util.InvincibleUtil;
 import com.minegusta.mgbossesredone.main.Main;
 import org.bukkit.Bukkit;
@@ -27,6 +28,7 @@ public class ExplodingPigmen implements IPower {
 
 	@Override
 	public void run(LivingEntity boss, List<LivingEntity> target) {
+		if(!EntityUtil.canSpawnLivingEntity(boss.getLocation(), 40, 25)) return;
 		List<LivingEntity> pigZombies = Lists.newArrayList();
 		for(int i = 0; i < 3; i++)
 		{

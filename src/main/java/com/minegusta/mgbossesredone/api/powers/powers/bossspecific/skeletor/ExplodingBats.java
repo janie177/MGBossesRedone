@@ -2,6 +2,7 @@ package com.minegusta.mgbossesredone.api.powers.powers.bossspecific.skeletor;
 
 import com.google.common.collect.Maps;
 import com.minegusta.mgbossesredone.api.powers.IPower;
+import com.minegusta.mgbossesredone.api.util.EntityUtil;
 import com.minegusta.mgbossesredone.api.util.RandomUtil;
 import com.minegusta.mgbossesredone.main.Main;
 import org.bukkit.Bukkit;
@@ -28,6 +29,7 @@ public class ExplodingBats implements IPower {
 
 	@Override
 	public void run(LivingEntity boss, List<LivingEntity> target) {
+		if(!EntityUtil.canSpawnLivingEntity(boss.getLocation(), 40, 25)) return;
 		if(target.isEmpty())return;
 		ConcurrentMap<LivingEntity, LivingEntity> bats = Maps.newConcurrentMap();
 		for(int i = 0; i < 3; i++)

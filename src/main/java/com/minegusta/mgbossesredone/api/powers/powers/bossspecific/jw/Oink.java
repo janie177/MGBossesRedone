@@ -1,6 +1,7 @@
 package com.minegusta.mgbossesredone.api.powers.powers.bossspecific.jw;
 
 import com.minegusta.mgbossesredone.api.powers.IPower;
+import com.minegusta.mgbossesredone.api.util.EntityUtil;
 import com.minegusta.mgbossesredone.main.Main;
 import org.bukkit.Bukkit;
 import org.bukkit.Sound;
@@ -24,6 +25,7 @@ public class Oink implements IPower {
 
 	@Override
 	public void run(LivingEntity boss, List<LivingEntity> target) {
+		if(!EntityUtil.canSpawnLivingEntity(boss.getLocation(), 40, 25)) return;
 		if(target.isEmpty()) return;
 		Vector v = target.get(0).getLocation().toVector().subtract(boss.getLocation().toVector());
 		Pig pig = (Pig) boss.getWorld().spawnEntity(boss.getLocation().clone().add(0,1,0), EntityType.PIG);
