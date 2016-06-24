@@ -5,6 +5,9 @@ import com.minegusta.mgbossesredone.api.powers.IPower;
 import com.minegusta.mgbossesredone.main.Main;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
+import org.bukkit.Material;
+import org.bukkit.block.Block;
+import org.bukkit.block.BlockFace;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.util.Vector;
 
@@ -23,6 +26,11 @@ public class Jump implements IPower {
 
 	@Override
 	public void run(LivingEntity boss, List<LivingEntity> target) {
+		Block b = boss.getLocation().getBlock().getRelative(BlockFace.DOWN);
+		if(b.getType() == Material.AIR && b.getRelative(BlockFace.DOWN).getType() == Material.AIR)
+		{
+			return;
+		}
 		jump(boss);
 	}
 
