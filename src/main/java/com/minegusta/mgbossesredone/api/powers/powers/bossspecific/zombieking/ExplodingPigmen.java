@@ -29,6 +29,7 @@ public class ExplodingPigmen implements IPower {
 	@Override
 	public void run(LivingEntity boss, List<LivingEntity> target) {
 		if(!EntityUtil.canSpawnLivingEntity(boss.getLocation(), 40, 25)) return;
+		if(boss.getWorld().getPlayers().stream().filter(p -> p.getLocation().distance(boss.getLocation()) < 30).count() < 1) return;
 		List<LivingEntity> pigZombies = Lists.newArrayList();
 		for(int i = 0; i < 3; i++)
 		{
