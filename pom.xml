@@ -8,7 +8,7 @@
     <artifactId>com.minegusta</artifactId>
     <version>0.1.0.0</version>
     <properties> <!-- It is important to keep up to date manually. -->
-        <spigot.version>1.9.2-R0.1-SNAPSHOT</spigot.version>
+        <spigot.version>1.10.2-R0.1-SNAPSHOT</spigot.version>
     </properties>
 
     <repositories>

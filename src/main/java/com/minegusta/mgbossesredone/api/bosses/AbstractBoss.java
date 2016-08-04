@@ -165,12 +165,14 @@ public abstract class AbstractBoss
         getSpawnLocation().setInstance(null);
     }
 
-    public void checkDeath(EntityDamageEvent e)
+    public boolean checkDeath(EntityDamageEvent e)
     {
         if(entity.getHealth() - e.getDamage() < 1)
         {
             onDeath(true, true, true);
+            return true;
         }
+        return false;
     }
 
     public abstract void onDamage(EntityDamageEvent e, Optional<LivingEntity> attacker, boolean arrow);
