@@ -5,6 +5,7 @@ import com.minegusta.mgbossesredone.api.BossesPlugin;
 import com.minegusta.mgbossesredone.api.bosses.AbstractBoss;
 import com.minegusta.mgbossesredone.api.powers.IPower;
 import com.minegusta.mgbossesredone.api.util.RandomUtil;
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.LivingEntity;
@@ -83,6 +84,8 @@ public class BossListener implements Listener
         {
             return;
         }
+
+        if(e.getCause() == EntityDamageEvent.DamageCause.CUSTOM) return;
 
         if((e.getCause() == EntityDamageEvent.DamageCause.FALL || e.getCause() == EntityDamageEvent.DamageCause.BLOCK_EXPLOSION || e.getCause() == EntityDamageEvent.DamageCause.ENTITY_EXPLOSION) && BossesPlugin.isBoss(e.getEntity().getUniqueId().toString()))
         {
